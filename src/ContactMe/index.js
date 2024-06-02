@@ -3,11 +3,12 @@ import * as React from 'react';
 // Components
 import { blue, blueGrey, grey } from '@mui/material/colors';
 import { AppBar, Avatar, Button, Container, Divider, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
-import Accordion from './CardInfos';
+import CardInfos from './CardInfos';
 import { useTheme } from '@mui/material/styles';
 import Jonathan from '../Images/jonathan.jpg';
 import Earth from '../Images/earth.jpg';
 import Aexae from '../Images/aexae.png';
+import LogicImmo from '../Images/logic-immo.png';
 import Contact from './Contact';
 // import ScrollToTop from './ScrollToTop';
 
@@ -56,26 +57,39 @@ const ContactMe = () => {
           pl: 5, 
           pr: 15
         }}>
-        <Stack sx={{ gap: 1 }}>
+        <Stack sx={{ gap: 2 }}>
           <Typography variant="h4">
             Experiences
           </Typography>
           <Divider sx={{ bgcolor: theme.palette.info.light }}/>
           <Stack sx={{ pl:2 }}>
-            <Accordion 
+            <CardInfos 
               id='aexae'
               title='AEXAE'
-              object='Web developper Front : REACT JS & Back : PHP, Laravel.'
+              object='Web developper Front : REACT JS & Back : PHP, Laravel, NodeJS.'
+              expanded
               logo={Aexae}
               period='2020 - 2024'
-              infos='Côté Front, interfaces REACT JS et NodeJS côté WebService.
-                    Tests automatisés.
-                    Côté Back, développement en PHP sous Laravel
-                    Tests unitaires.'
+              infos='Front side : interfaces with REACT JS. Automated testing with Mocha. 
+                    WebService side : NodeJS.
+                    Back side, development in PHP with Laravel and testing with PHPUnit.'
+            />
+            <CardInfos 
+              id='logic-immo'
+              title='Logic-Immo'
+              object='Web developper Back-end PHP, Zend Framework 2'
+              logo={LogicImmo}
+              period='2018 - 2019'
+              infos='
+                  Search Engine Optimization (SEO) of Logic-Immo sites. 
+                  Developpment in PHP with Zend Framework 2. 
+                  Units testing.
+                  Agile methodology.
+                  '
             />
           </Stack>
         </Stack>
-        <Stack sx={{ gap: 1 }}>
+        <Stack sx={{ gap: 2 }}>
           <Typography variant="h4">
           Curriculum
           </Typography>
@@ -83,7 +97,7 @@ const ContactMe = () => {
           <Stack sx={{ pl: 2 }}>
           </Stack>
         </Stack>
-        <Stack sx={{ gap: 1 }}>
+        <Stack sx={{ gap: 2 }}>
           <Typography variant="h4">
             Skills
           </Typography>
@@ -91,7 +105,7 @@ const ContactMe = () => {
           <Stack sx={{ pl: 2 }}>
           </Stack>
         </Stack>
-        <Stack sx={{ gap: 1 }}>
+        <Stack sx={{ gap: 2 }}>
           <Typography variant="h4">
             Hobbies
           </Typography>
