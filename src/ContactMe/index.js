@@ -4,17 +4,18 @@ import * as React from 'react';
 import { blue, blueGrey, grey } from '@mui/material/colors';
 import { AppBar, Avatar, Button, Container, Divider, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+// Logos
+import Aexae from '../Media/Logos/aexae.png';
+import LogicImmo from '../Media/Logos/logic-immo.png';
+import RciBankAndServices from '../Media/Logos/rci-bank-and-services.png';
+import Esgi from '../Media/Logos/esgi.png';
+import Itis from '../Media/Logos/itis.png';
 // Images
-import Jonathan from '../Images/jonathan.jpg';
-import Earth from '../Images/earth.jpg';
-import Aexae from '../Images/aexae.png';
-import LogicImmo from '../Images/logic-immo.png';
-import RciBankAndServices from '../Images/rci-bank-and-services.png';
-import Esgi from '../Images/esgi.png';
-import Itis from '../Images/itis.png';
-import Running from '../Images/running.jpg';
-import Writing from '../Images/writing-reading.jpg';
-import MilkyWay from '../Images/milky-way-galaxy.jpg';
+import Jonathan from '../Media/Images/jonathan.jpg';
+import Earth from '../Media/Images/earth.jpg';
+import Running from '../Media/Images/running.jpg';
+import Writing from '../Media/Images/writing-reading.jpg';
+import MilkyWay from '../Media/Images/milky-way-galaxy.jpg';
 // Local components
 import AccordionInfos from './AccordionInfos';
 import Contact from './Contact';
