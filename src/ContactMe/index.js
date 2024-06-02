@@ -38,13 +38,13 @@ const ContactMe = () => {
           p: 1 
         }}>
         <Avatar alt="Jonathan Dancette" src={Jonathan} sx={{ width: 96, height: 96 }} />
-        <Typography variant="h4" sx={{ textAlign: 'center', color: 'white' }}>
+        <Typography variant="h4" sx={{ color: 'white' }}>
           Jonathan Dancette
         </Typography>
         <Typography variant="h5" sx={{ color: blueGrey[50] }}>
           Web developper
         </Typography>
-        <Typography variant="body1" sx={{ color: blueGrey[50] }}>
+        <Typography variant="body1" sx={{ color: blueGrey[50], textAlign: 'center' }}>
           Hello world ! I'm Jonathan Dancette, Web developper. I am open-minded boy who likes discover new things. 
         </Typography>
       </Stack>
@@ -184,6 +184,11 @@ const ContactMe = () => {
                   data={[
                     {key: 'MUI', value: 90},
                     {key: 'MomentJS', value: 80}
+              ]}/>
+              <Skills 
+                  title='Methodology'
+                  data={[
+                    {key: 'AGILE', value: 80}
               ]}/>
           </Stack>
         </Stack>

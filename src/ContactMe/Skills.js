@@ -7,8 +7,8 @@ const Skills = ({ title, data}) => {
     <Stack sx={{ gap: 2}}>
         <Typography variant='h5' color='primary'> {title} </Typography>
         <Stack sx={{ gap: 1 }}>
-        {data.map((item) => (
-          <Stack direction="row">
+        {data.map((item, idx) => (
+          <Stack direction="row" key={idx}>
             <Typography variant='body2' sx={{ minWidth: 150 }}> {item.key} </Typography>
             <Slider 
               defaultValue={item.value} 
