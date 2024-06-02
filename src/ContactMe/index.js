@@ -13,14 +13,16 @@ import RciBankAndServices from '../Images/rci-bank-and-services.png';
 import Esgi from '../Images/esgi.png';
 import Itis from '../Images/itis.png';
 import Contact from './Contact';
+// Logic
+import { useMediaQueries } from '../hooks/useCustomHooks';
 // import ScrollToTop from './ScrollToTop';
 
 // ---------------------------------------------------------------------------------
 const navItems = ['Home', 'Experiences', 'Curriculum', 'Skills', 'Projects', 'Hobbies'];
 
 const ContactMe = () => {
-
   const theme = useTheme();
+  const { isMobile, isSmallDevice } = useMediaQueries();
 
   // JSX -------------------------------------------------------------------------
   return (
@@ -53,12 +55,12 @@ const ContactMe = () => {
         </Toolbar>
       </AppBar>
       <Stack 
-        sx={{ 
+        sx={{
           backgroundColor: grey[200],
           gap: 5,
           py: 2, 
-          pl: 5, 
-          pr: 15
+          pl: isMobile ? 2 : 5, 
+          pr: isMobile ? 5 : isSmallDevice ? 15 : 25
         }}>
         <Stack sx={{ gap: 2 }}>
           <Typography variant="h4">
