@@ -3,26 +3,33 @@ import * as React from 'react';
 // Components
 import { blue, blueGrey, grey } from '@mui/material/colors';
 import { AppBar, Avatar, Button, Container, Divider, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
-import Accordion from './Accordion';
-// import { useTheme } from '@mui/material/styles';
+import Accordion from './CardInfos';
+import { useTheme } from '@mui/material/styles';
 import Jonathan from '../Images/jonathan.jpg';
 import Earth from '../Images/earth.jpg';
+import Aexae from '../Images/aexae.png';
 import Contact from './Contact';
 // import ScrollToTop from './ScrollToTop';
 
 // ---------------------------------------------------------------------------------
-const navItems = ['Home', 'Experiences', 'Curriculum', 'Skills', 'Hobbies'];
+const navItems = ['Home', 'Experiences', 'Curriculum', 'Skills', 'Projects', 'Hobbies'];
 
 const ContactMe = () => {
 
-  // const theme = useTheme();
+  const theme = useTheme();
 
   // JSX -------------------------------------------------------------------------
   return (
     <Container  id="back-to-top-anchor" maxWidth={false} disableGutters>
-      <Stack sx={{ alignItems: 'center', backgroundImage: `url(${Earth})`, gap: 1, p: 1 }}>
+      <Stack 
+        sx={{ 
+          alignItems: 'center', 
+          backgroundImage: `url(${Earth})`, 
+          gap: 1, 
+          p: 1 
+        }}>
         <Avatar alt="Jonathan Dancette" src={Jonathan} sx={{ width: 96, height: 96 }} />
-        <Typography variant="h4" sx={{ color: 'white' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: 'white' }}>
           Jonathan Dancette
         </Typography>
         <Typography variant="h5" sx={{ color: blueGrey[50] }}>
@@ -53,36 +60,43 @@ const ContactMe = () => {
           <Typography variant="h4">
             Experiences
           </Typography>
-          <Divider sx={{ bgcolor: (theme) => theme.palette.info.light }}/>
+          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
           <Stack sx={{ pl:2 }}>
-            <Accordion />
+            <Accordion 
+              id='aexae'
+              title='AEXAE'
+              object='Web developper Front : REACT JS & Back : PHP, Laravel.'
+              logo={Aexae}
+              period='2020 - 2024'
+              infos='Côté Front, interfaces REACT JS et NodeJS côté WebService.
+                    Tests automatisés.
+                    Côté Back, développement en PHP sous Laravel
+                    Tests unitaires.'
+            />
           </Stack>
         </Stack>
         <Stack sx={{ gap: 1 }}>
           <Typography variant="h4">
           Curriculum
           </Typography>
-          <Divider sx={{ bgcolor: (theme) => theme.palette.info.light }}/>
+          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
           <Stack sx={{ pl: 2 }}>
-            <Accordion />
           </Stack>
         </Stack>
         <Stack sx={{ gap: 1 }}>
           <Typography variant="h4">
             Skills
           </Typography>
-          <Divider sx={{ bgcolor: (theme) => theme.palette.info.light }}/>
+          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
           <Stack sx={{ pl: 2 }}>
-            <Accordion />
           </Stack>
         </Stack>
         <Stack sx={{ gap: 1 }}>
           <Typography variant="h4">
             Hobbies
           </Typography>
-          <Divider sx={{ bgcolor: (theme) => theme.palette.info.light }}/>
+          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
           <Stack sx={{ pl: 2 }}>
-            <Accordion />
           </Stack>
         </Stack>
       </Stack>
@@ -95,8 +109,7 @@ const ContactMe = () => {
             justifyContent: 'center', 
             gap: 5, 
             pt: 1 
-          }}
-        >
+          }}>
           <Typography variant="body2" sx={{ color: 'white' }} >Linkedin</Typography>
           <Typography variant="body2" sx={{ color: 'white' }}>Github</Typography>
           <Typography variant="body2" sx={{ color: 'white' }}>HyperSciences</Typography>
@@ -108,7 +121,8 @@ const ContactMe = () => {
             justifyContent: 'flex-start', 
             py: 1, 
             pl: 5 
-          }}>
+          }}
+        >
           <Typography variant="body2" sx={{ color: 'white' }} >© 2024 Jonathan Dancette | v1.0.0 </Typography>
         </Stack>
       </Stack>

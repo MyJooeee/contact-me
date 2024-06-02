@@ -16,8 +16,7 @@ const Contact = () => {
         bottom: 5,
         fontSize: 10,
         textTransform: 'none'
-      }}
-    >
+      }}>
       Contact me
     </Button>
   );
