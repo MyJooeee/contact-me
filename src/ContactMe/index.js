@@ -3,7 +3,6 @@ import * as React from 'react';
 // Components
 import { blue, blueGrey, grey } from '@mui/material/colors';
 import { AppBar, Avatar, Button, Container, Divider, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
-import CardInfos from './CardInfos';
 import { useTheme } from '@mui/material/styles';
 // Images
 import Jonathan from '../Images/jonathan.jpg';
@@ -13,9 +12,14 @@ import LogicImmo from '../Images/logic-immo.png';
 import RciBankAndServices from '../Images/rci-bank-and-services.png';
 import Esgi from '../Images/esgi.png';
 import Itis from '../Images/itis.png';
+import Running from '../Images/running.jpg';
+import Writing from '../Images/writing-reading.jpg';
+import MilkyWay from '../Images/milky-way-galaxy.jpg';
 // Local components
+import AccordionInfos from './AccordionInfos';
 import Contact from './Contact';
 import Skills from './Skills';
+import Hobby from './Hobby';
 // Logic
 import { useMediaQueries } from '../hooks/useCustomHooks';
 // import ScrollToTop from './ScrollToTop';
@@ -71,7 +75,7 @@ const ContactMe = () => {
           </Typography>
           <Divider sx={{ bgcolor: theme.palette.info.light }}/>
           <Stack sx={{ pl:2 }}>
-            <CardInfos 
+            <AccordionInfos 
               id='aexae'
               title='AEXAE'
               object='Web developper Front : REACT JS & Back : PHP, Laravel, NodeJS'
@@ -83,7 +87,7 @@ const ContactMe = () => {
                     Back side, development in PHP with Laravel and testing with PHPUnit.
                     '
             />
-            <CardInfos 
+            <AccordionInfos 
               id='logic-immo'
               title='Logic-Immo'
               object='Web developper Back-end PHP, Zend Framework 2'
@@ -96,7 +100,7 @@ const ContactMe = () => {
                   Agile methodology.
                   '
             />
-            <CardInfos 
+            <AccordionInfos 
               id='rci-bank-and-services'
               title='RCI Bank and Services'
               object='Study contract, Web developper'
@@ -116,7 +120,7 @@ const ContactMe = () => {
           </Typography>
           <Divider sx={{ bgcolor: theme.palette.info.light }}/>
           <Stack sx={{ pl: 2 }}>
-          <CardInfos 
+          <AccordionInfos 
               id='esgi-master'
               title='ESGI, Master'
               object='Expert diploma in computer science and information systems engineering'
@@ -128,7 +132,7 @@ const ContactMe = () => {
                     Hackathon Web events with end customers.
                     '
             />
-            <CardInfos 
+            <AccordionInfos 
               id='esgi-licence'
               title='ESGI, Licence'
               object='Software and network project manager diploma'
@@ -138,7 +142,7 @@ const ContactMe = () => {
                     Acquisition of advanced computer skills.
                     '
             />
-            <CardInfos 
+            <AccordionInfos 
               id='itis-bts'
               title='ITIS, BTS'
               object='IT services for organizations, development option'
@@ -158,7 +162,7 @@ const ContactMe = () => {
               title='Languages'
               data={[
                 {key: 'PHP', value: 90},
-                {key: 'REACT JS', value: 85},
+                {key: 'JS', value: 80},
                 {key: 'HTML5/CSS3', value: 75}
 
               ]}/>
@@ -166,24 +170,23 @@ const ContactMe = () => {
                   title='Frameworks'
                   data={[
                     {key: 'Laravel', value: 80},
-                    {key: 'Zend Framework', value: 65},
+                    {key: 'Zend Framework 2', value: 60},
                     {key: 'Symfony', value: 50},
-                    {key: 'Composer', value: 65},
                     {key: 'PHP MVC', value: 95}
               ]}/>
               <Skills 
                   title='Technologies'
                   data={[
-                    {key: 'NodeJS', value: 65},
-                    {key: 'Npm', value: 80},
+                    {key: 'NodeJS', value: 60},
                     {key: 'MySQL', value: 75},
                     {key: 'Git', value: 90}
               ]}/>
               <Skills 
                   title='Librairies'
                   data={[
-                    {key: 'MUI', value: 90},
-                    {key: 'MomentJS', value: 80}
+                    {key: 'REACT JS', value: 85},
+                    {key: 'MUI', value: 85},
+                    {key: 'MomentJS', value: 75}
               ]}/>
               <Skills 
                   title='Methodology'
@@ -197,7 +200,28 @@ const ContactMe = () => {
             Hobbies
           </Typography>
           <Divider sx={{ bgcolor: theme.palette.info.light }}/>
-          <Stack sx={{ pl: 2 }}>
+          <Stack direction='row' sx={{ gap: 2, pl: 2, flexWrap: 'wrap' }}>
+            <Hobby 
+              title='Running'
+              description="I try to run regularly or even walk to clear my head and stay cool."
+              alt='running image'
+              image={Running}
+              ownerImage='https://www.flickr.com/photos/104091796@N05/'
+            />
+            <Hobby 
+              title='Writing and reading'
+              description="What's better than writing or reading and silence to really find yourself."
+              alt='writting reading image'
+              image={Writing}
+              ownerImage='https://www.flickr.com/photos/jamie238/'
+            />
+            <Hobby 
+              title='Sciences'
+              description="Curious by nature, understanding the world we live in is enchanting. Physics is fascinating for me."
+              alt='sciences image'
+              image={MilkyWay}
+              ownerImage='https://www.flickr.com/photos/clemensgilles/'
+            />
           </Stack>
         </Stack>
       </Stack>

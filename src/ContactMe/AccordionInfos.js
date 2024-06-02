@@ -3,7 +3,7 @@ import { Accordion, AccordionSummary, AccordionDetails, Stack, Typography } from
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { grey } from '@mui/material/colors';
 
-const CardInfos = ({ id, infos, expanded, logo, object, period, title }) => {
+const AccordionInfos = ({ id, infos, expanded, logo, object, period, title }) => {
 
   return (
       <Accordion defaultExpanded={expanded} sx={{ boxShadow: 3, minHeight: 100 }} >
@@ -34,4 +34,4 @@ const CardInfos = ({ id, infos, expanded, logo, object, period, title }) => {
   );
 };
 
-export default CardInfos;
+export default AccordionInfos;
