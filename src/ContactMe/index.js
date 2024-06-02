@@ -9,6 +9,9 @@ import Jonathan from '../Images/jonathan.jpg';
 import Earth from '../Images/earth.jpg';
 import Aexae from '../Images/aexae.png';
 import LogicImmo from '../Images/logic-immo.png';
+import RciBankAndServices from '../Images/rci-bank-and-services.png';
+import Esgi from '../Images/esgi.png';
+import Itis from '../Images/itis.png';
 import Contact from './Contact';
 // import ScrollToTop from './ScrollToTop';
 
@@ -66,13 +69,14 @@ const ContactMe = () => {
             <CardInfos 
               id='aexae'
               title='AEXAE'
-              object='Web developper Front : REACT JS & Back : PHP, Laravel, NodeJS.'
+              object='Web developper Front : REACT JS & Back : PHP, Laravel, NodeJS'
               expanded
               logo={Aexae}
               period='2020 - 2024'
               infos='Front side : interfaces with REACT JS. Automated testing with Mocha. 
                     WebService side : NodeJS.
-                    Back side, development in PHP with Laravel and testing with PHPUnit.'
+                    Back side, development in PHP with Laravel and testing with PHPUnit.
+                    '
             />
             <CardInfos 
               id='logic-immo'
@@ -87,6 +91,18 @@ const ContactMe = () => {
                   Agile methodology.
                   '
             />
+            <CardInfos 
+              id='rci-bank-and-services'
+              title='RCI Bank and Services'
+              object='Study contract, Web developper'
+              logo={RciBankAndServices}
+              period='2013 - 2017'
+              infos='
+                  Participation in mainframe to open migration project. 
+                  Follow-up and animation of meetings as MOE. 
+                  Development of internal PHP tools.
+                  '
+            />
           </Stack>
         </Stack>
         <Stack sx={{ gap: 2 }}>
@@ -95,6 +111,36 @@ const ContactMe = () => {
           </Typography>
           <Divider sx={{ bgcolor: theme.palette.info.light }}/>
           <Stack sx={{ pl: 2 }}>
+          <CardInfos 
+              id='esgi-master'
+              title='ESGI, Master'
+              object='Expert diploma in computer science and information systems engineering'
+              expanded
+              logo={Esgi}
+              period='2015 - 2017'
+              infos='Degree recognized by the state level 1. 
+                    Theoretical and practical learning through Web projects. 
+                    Hackathon Web events with end customers.
+                    '
+            />
+            <CardInfos 
+              id='esgi-licence'
+              title='ESGI, Licence'
+              object='Software and network project manager diploma'
+              logo={Esgi}
+              period='2014 - 2015'
+              infos='Degree recognized by the state level 2. 
+                    Acquisition of advanced computer skills.
+                    '
+            />
+            <CardInfos 
+              id='itis-bts'
+              title='ITIS, BTS'
+              object='IT services for organizations, development option'
+              logo={Itis}
+              period='2012 - 2014'
+              infos='Applications development and maintenance, user support.'
+            />
           </Stack>
         </Stack>
         <Stack sx={{ gap: 2 }}>

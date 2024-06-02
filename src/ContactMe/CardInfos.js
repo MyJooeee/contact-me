@@ -21,6 +21,7 @@ const CardInfos = ({ id, infos, expanded, logo, object, period, title }) => {
               width={80}
             />
             <Stack gap={1}>
+            <Typography variant="h5"> {title} </Typography>
               <Typography variant="h6"> {object} </Typography>
               <Typography variant="h7"> {period} </Typography>
             </Stack>
