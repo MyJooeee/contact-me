@@ -5,6 +5,7 @@ import { blue, blueGrey, grey } from '@mui/material/colors';
 import { AppBar, Avatar, Button, Container, Divider, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 import CardInfos from './CardInfos';
 import { useTheme } from '@mui/material/styles';
+// Images
 import Jonathan from '../Images/jonathan.jpg';
 import Earth from '../Images/earth.jpg';
 import Aexae from '../Images/aexae.png';
@@ -12,7 +13,9 @@ import LogicImmo from '../Images/logic-immo.png';
 import RciBankAndServices from '../Images/rci-bank-and-services.png';
 import Esgi from '../Images/esgi.png';
 import Itis from '../Images/itis.png';
+// Local components
 import Contact from './Contact';
+import Skills from './Skills';
 // Logic
 import { useMediaQueries } from '../hooks/useCustomHooks';
 // import ScrollToTop from './ScrollToTop';
@@ -150,7 +153,38 @@ const ContactMe = () => {
             Skills
           </Typography>
           <Divider sx={{ bgcolor: theme.palette.info.light }}/>
-          <Stack sx={{ pl: 2 }}>
+          <Stack sx={{ gap: 2, pl: 2 }}>
+            <Skills 
+              title='Languages'
+              data={[
+                {key: 'PHP', value: 90},
+                {key: 'REACT JS', value: 85},
+                {key: 'HTML5/CSS3', value: 75}
+
+              ]}/>
+               <Skills 
+                  title='Frameworks'
+                  data={[
+                    {key: 'Laravel', value: 80},
+                    {key: 'Zend Framework', value: 65},
+                    {key: 'Symfony', value: 50},
+                    {key: 'Composer', value: 65},
+                    {key: 'PHP MVC', value: 95}
+              ]}/>
+              <Skills 
+                  title='Technologies'
+                  data={[
+                    {key: 'NodeJS', value: 65},
+                    {key: 'Npm', value: 80},
+                    {key: 'MySQL', value: 75},
+                    {key: 'Git', value: 90}
+              ]}/>
+              <Skills 
+                  title='Librairie'
+                  data={[
+                    {key: 'MUI', value: 90},
+                    {key: 'MomentJS', value: 80}
+              ]}/>
           </Stack>
         </Stack>
         <Stack sx={{ gap: 2 }}>
