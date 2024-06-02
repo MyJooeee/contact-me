@@ -180,7 +180,7 @@ const ContactMe = () => {
                     {key: 'Git', value: 90}
               ]}/>
               <Skills 
-                  title='Librairie'
+                  title='Librairies'
                   data={[
                     {key: 'MUI', value: 90},
                     {key: 'MomentJS', value: 80}
