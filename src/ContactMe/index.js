@@ -23,6 +23,7 @@ import Skills from './Skills';
 import Hobby from './Hobby';
 // Logic
 import { useMediaQueries } from '../hooks/useCustomHooks';
+import Project from './Project';
 // import ScrollToTop from './ScrollToTop';
 
 // ---------------------------------------------------------------------------------
@@ -194,6 +195,40 @@ const ContactMe = () => {
                   data={[
                     {key: 'AGILE', value: 80}
               ]}/>
+          </Stack>
+        </Stack>
+        <Stack sx={{ gap: 2 }}>
+          <Typography variant="h4">
+            Projects
+          </Typography>
+          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
+          <Stack direction='row' sx={{ gap: 2, pl: 2, flexWrap: 'wrap' }}>
+            <Project 
+              title='Air Flow ©'
+              description='
+                        Application that detects changes in air quality based on geolocation. 
+                        Also provides weather information.
+                      '
+              skills={['REACT JS', 'HTML5/CSS3', 'MUI', 'Flexbox', 'Leaflet', 'NPM', 'API OpenWeather', 'Functional components']}
+              infoLink='Access to the App'
+              link='https://myjooeee.github.io/air-flow/'
+            />
+             <Project 
+              title='Build sentences fr ©'
+              description='Analyze structure of french words and generation of new words 
+                          based on analysis of more than 300 000 words.
+                        '
+              skills={['PHP', 'Composer', 'POO', 'Dependency injection', 'Services', 'Recursive function', 'Data']}
+              infoLink='Access to the Project'
+              link='https://github.com/MyJooeee/build-sentences-fr'
+            />
+            <Project 
+              title='Pendulum ©'
+              description='Simulation of a simple pendulum based on the equations of pendulum motion.'
+                        skills={['REACT JS', 'MUI', 'Flexbox', 'Canvas', 'Animation Frame', 'Physic']}
+              infoLink='Access to the App'
+              link='https://myjooeee.github.io/pendulum/'
+            />
           </Stack>
         </Stack>
         <Stack sx={{ gap: 2 }}>
