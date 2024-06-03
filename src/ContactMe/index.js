@@ -282,8 +282,7 @@ const ContactMe = () => {
             justifyContent: 'flex-start', 
             py: 1, 
             pl: 5 
-          }}
-        >
+          }}>
           <Typography variant="body2" sx={{ color: 'white' }} >© 2024 Jonathan Dancette | v1.0.0 </Typography>
         </Stack>
       </Stack>

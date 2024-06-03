@@ -1,3 +1,5 @@
+// Core
+import PropTypes from 'prop-types';
 // Components
 import { Accordion, AccordionSummary, AccordionDetails, Stack, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -32,6 +34,16 @@ const AccordionInfos = ({ id, infos, expanded, logo, object, period, title }) =>
         </AccordionDetails>
       </Accordion>
   );
+};
+
+AccordionInfos.propTypes = {
+  id: PropTypes.string,
+  infos: PropTypes.string,
+  expanded: PropTypes.bool,
+  logo: PropTypes.node,
+  object: PropTypes.string,
+  period: PropTypes.string,
+  title: PropTypes.string
 };
 
 export default AccordionInfos;
