@@ -7,7 +7,7 @@ const Contact = () => {
   return (
     <Button 
       variant="contained"
-      color="secondary"
+      color="info"
       size="small" 
       endIcon={<SendIcon sx={{ width: 12, height: 12 }} />} 
       sx={{

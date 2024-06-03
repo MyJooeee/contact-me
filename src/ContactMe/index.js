@@ -2,7 +2,7 @@
 import * as React from 'react';
 // Components
 import { blue, blueGrey, grey } from '@mui/material/colors';
-import { AppBar, Avatar, Button, Container, Divider, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
+import { Alert, AppBar, Avatar, Button, Container, Divider, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 // Logos
 import Aexae from '../Media/Logos/aexae.png';
@@ -53,6 +53,7 @@ const ContactMe = () => {
         <Typography variant="body1" sx={{ color: blueGrey[50], textAlign: 'center' }}>
           Hello world ! I'm Jonathan Dancette, Web developper. I am open-minded boy who likes discover new things. 
         </Typography>
+        <Alert severity="success">Open for a job in Web development</Alert>
       </Stack>
       <AppBar position="sticky">
         <Toolbar disableGutters sx={{ columnGap: 2, pl: 5, flexWrap: 'wrap' }}>
@@ -209,7 +210,7 @@ const ContactMe = () => {
                         Application that detects changes in air quality based on geolocation. 
                         Also provides weather information.
                       '
-              skills={['REACT JS', 'HTML5/CSS3', 'MUI', 'Flexbox', 'Leaflet', 'NPM', 'API OpenWeather', 'Functional components']}
+              skills={['REACT JS', 'HTML5/CSS3', 'MUI', 'Skeleton', 'Flexbox', 'Leaflet', 'NPM', 'API OpenWeather', 'Functional components']}
               infoLink='Access to the App'
               link='https://myjooeee.github.io/air-flow/'
             />
