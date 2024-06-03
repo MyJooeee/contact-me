@@ -2,7 +2,7 @@
 import * as React from 'react';
 // Components
 import { blue, blueGrey, grey } from '@mui/material/colors';
-import { AppBar, Avatar, Button, Container, Divider, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
+import { AppBar, Avatar, Button, Container, Divider, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 // Logos
 import Aexae from '../Media/Logos/aexae.png';
@@ -271,9 +271,10 @@ const ContactMe = () => {
             gap: 5, 
             pt: 1 
           }}>
-          <Typography variant="body2" sx={{ color: 'white' }} >Linkedin</Typography>
-          <Typography variant="body2" sx={{ color: 'white' }}>Github</Typography>
-          <Typography variant="body2" sx={{ color: 'white' }}>HyperSciences</Typography>
+          <Button> </Button>
+          <Link color='white' target="_blank" variant='caption' href='https://fr.linkedin.com/in/jonathan-dancette-72627a61' underline="none">Linkedin</Link> 
+          <Link color='white' target="_blank" variant='caption' href='https://github.com/MyJooeee' underline="none">Github</Link> 
+          <Link color='white' target="_blank" variant='caption' href='http://hypersciences.space' underline="none">HyperSciences</Link> 
         </Stack>
         <Stack 
           direction="row" 

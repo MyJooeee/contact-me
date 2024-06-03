@@ -22,8 +22,8 @@ const Project = ({description, infoLink, link, skills, title}) => {
           ))}
           </Stack>
           <Stack direction='row' sx={{alignItems: 'center', justifyContent: 'center', gap: 1}}>
-          <Typography variant='body2'>{infoLink} :</Typography>
-          <Link target="_blank" href={link} underline="none">{title}</Link> 
+          <Typography variant='caption'>{infoLink} :</Typography>
+          <Link target="_blank" variant='caption' href={link} underline="none">{title}</Link> 
           </Stack>
         </Stack>
       </CardContent>
