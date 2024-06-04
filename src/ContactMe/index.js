@@ -336,7 +336,7 @@ const ContactMe = () => {
             py: 1, 
             pl: 5 
           }}>
-          <Typography variant="body2" sx={{ color: 'white' }} >© 2024 Jonathan Dancette | v1.0.0 </Typography>
+          <Typography variant="body2" sx={{ color: 'white' }}>© 2024 Jonathan Dancette, all rights reserved. | v1.0.0</Typography>
         </Stack>
       </Stack>
       <Drawer
