@@ -2,7 +2,8 @@
 import { useState, useRef } from 'react';
 // Components
 import { blue, blueGrey, grey } from '@mui/material/colors';
-import { Alert, AppBar, Avatar, Button, Container, Divider, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
+import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import { useTheme } from '@mui/material/styles';
 // Logos
 import Aexae from '../Media/Logos/aexae.png';
@@ -20,25 +21,22 @@ import MilkyWay from '../Media/Images/milky-way-galaxy.jpg';
 import AccordionInfos from './AccordionInfos';
 import Contact from './Contact';
 import Skills from './Skills';
+import Project from './Project';
 import Hobby from './Hobby';
 // Logic
 import { useMediaQueries } from '../hooks/useCustomHooks';
-import Project from './Project';
-// import ScrollToTop from './ScrollToTop';
 
 // ---------------------------------------------------------------------------------
 const ContactMe = () => {
   const theme = useTheme();
   const { isMobile, isSmallDevice } = useMediaQueries();
   const [navMenu, setNavMenu] = useState('Home');
-
   const refHome = useRef();
   const refExperiences = useRef();
   const refCurriculum = useRef();
   const refSkills = useRef();
   const refProjects = useRef();
   const refHobbies = useRef();
-
   const navItems = [
     {
       nav: 'Home',
@@ -65,6 +63,16 @@ const ContactMe = () => {
       ref: refHobbies
     }
   ];
+
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  // Handlers --------------------------------------------------------------------
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setOpenDrawer(open);
+  };
 
   // JSX -------------------------------------------------------------------------
   return (
@@ -331,7 +339,23 @@ const ContactMe = () => {
           <Typography variant="body2" sx={{ color: 'white' }} >© 2024 Jonathan Dancette | v1.0.0 </Typography>
         </Stack>
       </Stack>
-      <Contact />
+      <Drawer
+        anchor='bottom'
+        open={openDrawer}
+        onClose={toggleDrawer(false)}>
+       <Stack 
+          direction='row' 
+          sx={{ 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            p: 3, 
+            gap: 2
+        }}>
+          <ContactMailIcon />
+          <Typography variant='overline'>dancette.jonathan@gmail.com</Typography>
+       </Stack>
+      </Drawer>
+      <Contact onClick={toggleDrawer(true)} />
     </Container>
   );
 };
