@@ -1,7 +1,7 @@
 // Core
 import { useState, useRef } from 'react';
 // Components
-import { blue, blueGrey, grey } from '@mui/material/colors';
+import { blue, blueGrey, grey, purple } from '@mui/material/colors';
 import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import { useTheme } from '@mui/material/styles';
@@ -346,6 +346,7 @@ const ContactMe = () => {
        <Stack 
           direction='row' 
           sx={{ 
+            backgroundColor: purple[50],
             alignItems: 'center', 
             justifyContent: 'center', 
             p: 3, 
