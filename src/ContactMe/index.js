@@ -1,5 +1,5 @@
 // Core
-import * as React from 'react';
+import { useState, useRef } from 'react';
 // Components
 import { blue, blueGrey, grey } from '@mui/material/colors';
 import { Alert, AppBar, Avatar, Button, Container, Divider, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
@@ -27,15 +27,48 @@ import Project from './Project';
 // import ScrollToTop from './ScrollToTop';
 
 // ---------------------------------------------------------------------------------
-const navItems = ['Home', 'Experiences', 'Curriculum', 'Skills', 'Projects', 'Hobbies'];
-
 const ContactMe = () => {
   const theme = useTheme();
   const { isMobile, isSmallDevice } = useMediaQueries();
+  const [navMenu, setNavMenu] = useState('Home');
+
+  const refHome = useRef();
+  const refExperiences = useRef();
+  const refCurriculum = useRef();
+  const refSkills = useRef();
+  const refProjects = useRef();
+  const refHobbies = useRef();
+
+  const navItems = [
+    {
+      nav: 'Home',
+      ref: refHome
+    },
+    {
+      nav: 'Experiences',
+      ref: refExperiences
+    },
+    {
+      nav: 'Curriculum',
+      ref: refCurriculum
+    },
+    {
+      nav: 'Skills',
+      ref: refSkills
+    },
+    {
+      nav: 'Projects',
+      ref: refProjects
+    },
+    {
+      nav: 'Hobbies',
+      ref: refHobbies
+    }
+  ];
 
   // JSX -------------------------------------------------------------------------
   return (
-    <Container  id="back-to-top-anchor" maxWidth={false} disableGutters>
+    <Container ref={refHome} maxWidth={false} disableGutters>
       <Stack 
         sx={{ 
           alignItems: 'center', 
@@ -57,9 +90,19 @@ const ContactMe = () => {
       </Stack>
       <AppBar position="sticky">
         <Toolbar disableGutters sx={{ columnGap: 2, pl: 5, flexWrap: 'wrap' }}>
-          {navItems.map((item) => (
-            <Button key={item} sx={{ color: 'white' }}>
-              {item}
+          {navItems.map((item, idx) => (
+            <Button
+              key={idx}
+              sx={{color: 'white', fontWeight: navMenu === item.nav ? 'bold' : 'normal'}}
+              onClick={() => {
+                item.ref.current?.scrollIntoView({
+                  behavior: 'smooth'
+                });
+                setNavMenu(item.nav);
+                }
+              }
+            >
+              {item.nav}
             </Button>
           ))}
         </Toolbar>
@@ -72,7 +115,7 @@ const ContactMe = () => {
           pl: isMobile ? 2 : 5, 
           pr: isMobile ? 5 : isSmallDevice ? 15 : 25
         }}>
-        <Stack sx={{ gap: 2 }}>
+        <Stack ref={refExperiences} sx={{ gap: 2 }}>
           <Typography variant="h4">
             Experiences
           </Typography>
@@ -117,7 +160,7 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack sx={{ gap: 2 }}>
+        <Stack ref={refCurriculum} sx={{ gap: 2 }}>
           <Typography variant="h4">
           Curriculum
           </Typography>
@@ -155,7 +198,7 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack sx={{ gap: 2 }}>
+        <Stack  ref={refSkills} sx={{ gap: 2 }}>
           <Typography variant="h4">
             Skills
           </Typography>
@@ -198,7 +241,7 @@ const ContactMe = () => {
               ]}/>
           </Stack>
         </Stack>
-        <Stack sx={{ gap: 2 }}>
+        <Stack ref={refProjects} sx={{ gap: 2 }}>
           <Typography variant="h4">
             Projects
           </Typography>
@@ -232,7 +275,7 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack sx={{ gap: 2 }}>
+        <Stack ref={refHobbies} sx={{ gap: 2 }}>
           <Typography variant="h4">
             Hobbies
           </Typography>
