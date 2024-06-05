@@ -1,5 +1,5 @@
 // Core
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 // Components
 import { blue, blueGrey, grey, purple } from '@mui/material/colors';
 import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
@@ -30,7 +30,8 @@ import { useMediaQueries } from '../hooks/useCustomHooks';
 const ContactMe = () => {
   const theme = useTheme();
   const { isMobile, isSmallDevice } = useMediaQueries();
-  const [navMenu, setNavMenu] = useState('Home');
+  const [navMenuId, setNavMenuId] = useState('home-section');
+  const sections = useRef([]);
   const refHome = useRef();
   const refExperiences = useRef();
   const refCurriculum = useRef();
@@ -39,26 +40,32 @@ const ContactMe = () => {
   const refHobbies = useRef();
   const navItems = [
     {
+      id: 'home-section',
       nav: 'Home',
       ref: refHome
     },
     {
+      id: 'experiences-section',
       nav: 'Experiences',
       ref: refExperiences
     },
     {
+      id: 'curriculum-section',
       nav: 'Curriculum',
       ref: refCurriculum
     },
     {
+      id: 'skills-section',
       nav: 'Skills',
       ref: refSkills
     },
     {
+      id: 'projects-section',
       nav: 'Projects',
       ref: refProjects
     },
     {
+      id: 'hobbies-section',
       nav: 'Hobbies',
       ref: refHobbies
     }
@@ -66,7 +73,38 @@ const ContactMe = () => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  // Effects ---------------------------------------------------------------------
+  useEffect(() => {
+    sections.current = document.querySelectorAll('[data-section]');
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
   // Handlers --------------------------------------------------------------------
+
+  const handleScroll = () => {
+    const pageYOffset = window.scrollY;
+    let newActiveSection = null;
+
+    // Fire last nav section if bottom of page is reached
+    const bottomOfPageReached = Math.ceil(window.innerHeight + pageYOffset) >= document.documentElement.scrollHeight;
+
+    sections.current.forEach((section) => {
+      const sectionOffsetTop = section.offsetTop - 75; // 75 : Menu navbar height compensation
+      const sectionHeight = section.offsetHeight + 75;
+
+      if ((pageYOffset >= sectionOffsetTop || bottomOfPageReached) && pageYOffset < sectionOffsetTop + sectionHeight) {
+        newActiveSection = section.id;
+      }
+    });
+
+    setNavMenuId(newActiveSection);
+  };
+
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -78,6 +116,8 @@ const ContactMe = () => {
   return (
     <Container ref={refHome} maxWidth={false} disableGutters>
       <Stack 
+        id='home-section'
+        data-section
         sx={{ 
           alignItems: 'center', 
           backgroundImage: `url(${Earth})`, 
@@ -101,12 +141,11 @@ const ContactMe = () => {
           {navItems.map((item, idx) => (
             <Button
               key={idx}
-              sx={{color: 'white', fontWeight: navMenu === item.nav ? 'bold' : 'normal'}}
+              sx={{color: 'white', fontWeight: navMenuId === item.id ? 'bold' : 'normal'}}
               onClick={() => {
                 item.ref.current?.scrollIntoView({
                   behavior: 'smooth'
                 });
-                setNavMenu(item.nav);
                 }
               }
             >
@@ -123,7 +162,7 @@ const ContactMe = () => {
           pl: isMobile ? 2 : 5, 
           pr: isMobile ? 5 : isSmallDevice ? 15 : 25
         }}>
-        <Stack ref={refExperiences} sx={{ gap: 2 }}>
+        <Stack id='experiences-section' data-section ref={refExperiences} sx={{ gap: 2 }}>
           <Typography variant="h4">
             Experiences
           </Typography>
@@ -168,7 +207,7 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack ref={refCurriculum} sx={{ gap: 2 }}>
+        <Stack id='curriculum-section' data-section ref={refCurriculum} sx={{ gap: 2 }}>
           <Typography variant="h4">
           Curriculum
           </Typography>
@@ -206,7 +245,7 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack  ref={refSkills} sx={{ gap: 2 }}>
+        <Stack id='skills-section' data-section ref={refSkills} sx={{ gap: 2 }}>
           <Typography variant="h4">
             Skills
           </Typography>
@@ -249,7 +288,7 @@ const ContactMe = () => {
               ]}/>
           </Stack>
         </Stack>
-        <Stack ref={refProjects} sx={{ gap: 2 }}>
+        <Stack id='projects-section' data-section ref={refProjects} sx={{ gap: 2 }}>
           <Typography variant="h4">
             Projects
           </Typography>
@@ -283,7 +322,7 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack ref={refHobbies} sx={{ gap: 2 }}>
+        <Stack id='hobbies-section' data-section ref={refHobbies} sx={{ gap: 2 }}>
           <Typography variant="h4">
             Hobbies
           </Typography>
@@ -323,7 +362,6 @@ const ContactMe = () => {
             gap: 5, 
             pt: 1 
           }}>
-          <Button> </Button>
           <Link color='white' target="_blank" variant='caption' href='https://fr.linkedin.com/in/jonathan-dancette-72627a61' underline="none">Linkedin</Link> 
           <Link color='white' target="_blank" variant='caption' href='https://github.com/MyJooeee' underline="none">Github</Link> 
           <Link color='white' target="_blank" variant='caption' href='http://hypersciences.space' underline="none">HyperSciences</Link> 
@@ -353,7 +391,7 @@ const ContactMe = () => {
             gap: 2
         }}>
           <ContactMailIcon />
-          <Typography variant='overline'>dancette.jonathan@gmail.com</Typography>
+          <Typography variant='overline'>To get my CV or just contact me : dancette.jonathan@gmail.com</Typography>
        </Stack>
       </Drawer>
       <Contact onClick={toggleDrawer(true)} />
