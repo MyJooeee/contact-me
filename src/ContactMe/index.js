@@ -28,6 +28,7 @@ import { useMediaQueries } from '../hooks/useCustomHooks';
 
 // ---------------------------------------------------------------------------------
 const ContactMe = () => {
+  const APP_VERSION = process.env.REACT_APP_VERSION;
   const theme = useTheme();
   const { isMobile, isSmallDevice } = useMediaQueries();
   const [navMenuId, setNavMenuId] = useState('home-section');
@@ -374,7 +375,7 @@ const ContactMe = () => {
             py: 1, 
             pl: 5 
           }}>
-          <Typography variant="body2" sx={{ color: 'white' }}>© 2024 Jonathan Dancette, all rights reserved. | v1.0.0</Typography>
+          <Typography variant="body2" sx={{ color: 'white' }}>© 2024 Jonathan Dancette, all rights reserved. | v{APP_VERSION}</Typography>
         </Stack>
       </Stack>
       <Drawer
