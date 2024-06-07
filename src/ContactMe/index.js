@@ -1,5 +1,6 @@
 // Core
 import { useState, useRef, useEffect } from 'react';
+import { getSpotifyAccessToken } from '../api';
 // Components
 import { blue, blueGrey, grey, purple } from '@mui/material/colors';
 import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
@@ -29,6 +30,7 @@ import { useMediaQueries } from '../hooks/useCustomHooks';
 // ---------------------------------------------------------------------------------
 const ContactMe = () => {
   const APP_VERSION = process.env.REACT_APP_VERSION;
+
   const theme = useTheme();
   const { isMobile, isSmallDevice } = useMediaQueries();
   const [navMenuId, setNavMenuId] = useState('home-section');
@@ -79,14 +81,34 @@ const ContactMe = () => {
     sections.current = document.querySelectorAll('[data-section]');
     window.addEventListener('scroll', handleScroll);
 
+    getAccessToken().then((accessToken) => {
+      console.log('accessToken', accessToken);
+    });
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  // Functions -------------------------------------------------------------------
+  const getAccessToken = async () => {
+    try {
+      const response = await getSpotifyAccessToken(() => {
+        console.log('Error when fetching API');
+        return;
+      });
+      if (response.error) {
+        console.log('Error when fetching API');
+        return;
+      }
+      return response.access_token;
+    } catch (error) {
+      console.log('Error when fetching API');
+      return;
+    }
+  };
 
   // Handlers --------------------------------------------------------------------
-
   const handleScroll = () => {
     const pageYOffset = window.scrollY;
     let newActiveSection = null;
