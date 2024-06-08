@@ -1,6 +1,7 @@
 // Core
 import { useState, useRef, useEffect } from 'react';
-import { getSpotifyAccessToken } from '../api';
+import moment from 'moment';
+import { fetchApi } from '../api';
 // Components
 import { blue, blueGrey, grey, purple } from '@mui/material/colors';
 import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
@@ -30,6 +31,11 @@ import { useMediaQueries } from '../hooks/useCustomHooks';
 // ---------------------------------------------------------------------------------
 const ContactMe = () => {
   const APP_VERSION = process.env.REACT_APP_VERSION;
+  const urlSpotAccessToken = process.env.REACT_APP_SPOTIFY_URL_ACCESS_TOKEN;
+  const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+  const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
+  const urlSpotArtists = process.env.REACT_APP_SPOTIFY_URL_ARTISTS;
+  const topSpotArtists = process.env.REACT_APP_SPOTIFY_MY_TOP_ARTISTS;
 
   const theme = useTheme();
   const { isMobile, isSmallDevice } = useMediaQueries();
@@ -81,29 +87,74 @@ const ContactMe = () => {
     sections.current = document.querySelectorAll('[data-section]');
     window.addEventListener('scroll', handleScroll);
 
-    getAccessToken().then((accessToken) => {
-      console.log('accessToken', accessToken);
-    });
+    const localToken = localStorage.getItem("accessToken");
+    const localTokenTime = localStorage.getItem("accessTokenTime");
+    const seconds = moment().diff(moment(localTokenTime), 'seconds');
+
+    // Token is still valid
+    if (localToken && seconds < 3600) {
+      getSpotifyData(localToken).then((data) => {
+        console.log('data', data);
+      });
+    // If no token or expired : new token
+    } else {
+      getAccessToken().then((accessToken) => {
+        getSpotifyData(accessToken).then((data) => {
+          console.log('data', data);
+        });
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("accessTokenTime", moment().format("YYYY-MM-DD HH:mm:ss"));
+      });
+    }
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  // Functions -------------------------------------------------------------------
+  // Functions -------------------------------------------------------------------  
   const getAccessToken = async () => {
     try {
-      const response = await getSpotifyAccessToken(() => {
-        console.log('Error when fetching API');
+      const authOptions = {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'grant_type=client_credentials',
+        json: true
+      };
+      const response = await fetchApi(`${urlSpotAccessToken}`, authOptions, (error) => {
+        console.log(error);
         return;
       });
       if (response.error) {
-        console.log('Error when fetching API');
+        console.log(response.error);
         return;
       }
       return response.access_token;
     } catch (error) {
-      console.log('Error when fetching API');
+      console.log(error);
+      return;
+    }
+  };
+
+  const getSpotifyData = async (token) => {
+    try {
+      const authOptions = {
+        method: 'GET',
+        headers: {
+          'Authorization' : 'Bearer ' + token
+        }
+      };
+      const response = await fetchApi(`${urlSpotArtists}?ids=${topSpotArtists}`, authOptions, (error) => {
+        console.log(error);
+        return;
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error);
       return;
     }
   };
