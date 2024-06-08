@@ -1,6 +1,6 @@
 import { Slider, Stack, Typography } from '@mui/material';
 
-
+// ---------------------------------------------------------------------------------
 const Skills = ({ title, data}) => {
 
   return (

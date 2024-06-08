@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // Components
 import { Box, Card, CardMedia, CardContent, Link, Typography   } from '@mui/material';
 
+// ---------------------------------------------------------------------------------
 const Hobby = ({ image, alt, ownerImage, title, description }) => {
     return (
       <Card sx={{ maxWidth: 345 }}>

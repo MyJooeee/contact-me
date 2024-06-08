@@ -6,7 +6,7 @@ const fetchApi = (url, authOptions = {}, callback = null) => {
         return result
       },
       (error) => {
-          if (callback) callback(error)
+        if (callback) callback(error)
       }
     );
 };

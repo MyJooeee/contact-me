@@ -17,13 +17,13 @@ const Project = ({description, infoLink, link, skills, title}) => {
             </Typography>
           </Stack>
           <Stack direction='row' sx={{flexWrap: 'wrap', gap: 0.5}}>
-          {skills.map((item, idx) => (
-            <Chip key={idx} label={item} color="primary" />
-          ))}
+            {skills.map((item, idx) => (
+              <Chip key={idx} label={item} color="primary" />
+            ))}
           </Stack>
           <Stack direction='row' sx={{alignItems: 'center', justifyContent: 'center', gap: 1}}>
-          <Typography variant='caption'>{infoLink} :</Typography>
-          <Link target="_blank" variant='caption' href={link} underline="none">{title}</Link> 
+            <Typography variant='caption'>{infoLink} :</Typography>
+            <Link target="_blank" variant='caption' href={link} underline="none">{title}</Link> 
           </Stack>
         </Stack>
       </CardContent>

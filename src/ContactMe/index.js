@@ -4,7 +4,7 @@ import moment from 'moment';
 import { fetchApi } from '../api';
 // Components
 import { blue, blueGrey, grey, purple } from '@mui/material/colors';
-import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
+import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Skeleton, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import { useTheme } from '@mui/material/styles';
 // Logos
@@ -27,6 +27,7 @@ import Project from './Project';
 import Hobby from './Hobby';
 // Logic
 import { useMediaQueries } from '../hooks/useCustomHooks';
+import SpotArtist from './SpotArtist';
 
 // ---------------------------------------------------------------------------------
 const ContactMe = () => {
@@ -47,6 +48,7 @@ const ContactMe = () => {
   const refSkills = useRef();
   const refProjects = useRef();
   const refHobbies = useRef();
+  const refMusics = useRef();
   const navItems = [
     {
       id: 'home-section',
@@ -77,10 +79,17 @@ const ContactMe = () => {
       id: 'hobbies-section',
       nav: 'Hobbies',
       ref: refHobbies
+    },
+    {
+      id: 'musics-section',
+      nav: 'Music artists',
+      ref: refMusics
     }
   ];
 
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [loadingSpot, setLoadingSpot] = useState(true);
+  const [artistsSpot, setArtistsSpot] = useState(null);
 
   // Effects ---------------------------------------------------------------------
   useEffect(() => {
@@ -94,13 +103,15 @@ const ContactMe = () => {
     // Token is still valid
     if (localToken && seconds < 3600) {
       getSpotifyData(localToken).then((data) => {
-        console.log('data', data);
+        setArtistsSpot(data);
+        setLoadingSpot(false);
       });
     // If no token or expired : new token
     } else {
       getAccessToken().then((accessToken) => {
         getSpotifyData(accessToken).then((data) => {
-          console.log('data', data);
+          setArtistsSpot(data);
+          setLoadingSpot(false);
         });
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("accessTokenTime", moment().format("YYYY-MM-DD HH:mm:ss"));
@@ -429,6 +440,27 @@ const ContactMe = () => {
               image={MilkyWay}
               ownerImage='https://www.flickr.com/photos/clemensgilles/'
             />
+          </Stack>
+        </Stack>
+        <Stack id='musics-section' data-section ref={refMusics} sx={{ gap: 2 }}>
+          <Typography variant="h4">
+            My favorite artists
+          </Typography>
+          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
+          <Stack direction='row' sx={{ gap: 2, pl: 2, flexWrap: 'wrap' }}>
+            {loadingSpot && [0, 1, 2, 3, 4].map((idx) => (
+            <Skeleton key={idx} animation='wave' variant='rectangular' width={345} height={345} />
+            ))}
+            {!loadingSpot && artistsSpot && artistsSpot.artists.map((artist, idx) => (
+              <SpotArtist 
+                key={idx}  
+                followers={artist.followers.total.toLocaleString()}
+                genres={artist.genres}
+                href={artist.external_urls.spotify}
+                image={artist.images[1]}
+                name={artist.name}
+              />
+            ))}
           </Stack>
         </Stack>
       </Stack>

@@ -5,6 +5,7 @@ import { Accordion, AccordionSummary, AccordionDetails, Stack, Typography } from
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { grey } from '@mui/material/colors';
 
+// ---------------------------------------------------------------------------------
 const AccordionInfos = ({ id, infos, isMobile, expanded, logo, object, period, title }) => {
 
   return (
