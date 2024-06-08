@@ -248,6 +248,7 @@ const ContactMe = () => {
               object='Web developper Front : REACT JS & Back : PHP, Laravel, NodeJS'
               expanded
               logo={Aexae}
+              isMobile={isMobile}
               period='2020 - 2024'
               infos='Front side : interfaces with REACT JS. Automated testing with Mocha. 
                     WebService side : NodeJS.
@@ -259,6 +260,7 @@ const ContactMe = () => {
               title='Logic-Immo'
               object='Web developper Back-end PHP, Zend Framework 2'
               logo={LogicImmo}
+              isMobile={isMobile}
               period='2018 - 2019'
               infos='
                   Search Engine Optimization (SEO) of Logic-Immo sites. 
@@ -272,6 +274,7 @@ const ContactMe = () => {
               title='RCI Bank and Services'
               object='Study contract, Web developper'
               logo={RciBankAndServices}
+              isMobile={isMobile}
               period='2013 - 2017'
               infos='
                   Participation in mainframe to open migration project. 
@@ -293,6 +296,7 @@ const ContactMe = () => {
               object='Expert diploma in computer science and information systems engineering'
               expanded
               logo={Esgi}
+              isMobile={isMobile}
               period='2015 - 2017'
               infos='Degree recognized by the state level 1. 
                     Theoretical and practical learning through Web projects. 
@@ -304,6 +308,7 @@ const ContactMe = () => {
               title='ESGI, Licence'
               object='Software and network project manager diploma'
               logo={Esgi}
+              isMobile={isMobile}
               period='2014 - 2015'
               infos='Degree recognized by the state level 2. 
                     Acquisition of advanced computer skills.
@@ -314,6 +319,7 @@ const ContactMe = () => {
               title='ITIS, BTS'
               object='IT services for organizations, development option'
               logo={Itis}
+              isMobile={isMobile}
               period='2012 - 2014'
               infos='Applications development and maintenance, user support.'
             />

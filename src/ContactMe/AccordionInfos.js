@@ -5,7 +5,7 @@ import { Accordion, AccordionSummary, AccordionDetails, Stack, Typography } from
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { grey } from '@mui/material/colors';
 
-const AccordionInfos = ({ id, infos, expanded, logo, object, period, title }) => {
+const AccordionInfos = ({ id, infos, isMobile, expanded, logo, object, period, title }) => {
 
   return (
       <Accordion defaultExpanded={expanded} sx={{ boxShadow: 3, minHeight: 100 }} >
@@ -23,9 +23,9 @@ const AccordionInfos = ({ id, infos, expanded, logo, object, period, title }) =>
               width={80}
             />
             <Stack gap={1}>
-            <Typography variant="h5"> {title} </Typography>
-              <Typography variant="h6"> {object} </Typography>
-              <Typography variant="h7"> {period} </Typography>
+            <Typography variant={isMobile ? 'h6' : 'h5'}> {title} </Typography>
+              <Typography variant={isMobile ? 'h7' : 'h6'}> {object} </Typography>
+              <Typography variant={isMobile ? 'h8' : 'h7'}> {period} </Typography>
             </Stack>
           </Stack>
         </AccordionSummary>
@@ -39,6 +39,7 @@ const AccordionInfos = ({ id, infos, expanded, logo, object, period, title }) =>
 AccordionInfos.propTypes = {
   id: PropTypes.string,
   infos: PropTypes.string,
+  isMobile: PropTypes.bool,
   expanded: PropTypes.bool,
   logo: PropTypes.node,
   object: PropTypes.string,
