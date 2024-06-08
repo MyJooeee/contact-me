@@ -214,10 +214,10 @@ const ContactMe = () => {
           Jonathan Dancette
         </Typography>
         <Typography variant="h5" sx={{ color: blueGrey[50] }}>
-          Web developper
+          Web developer
         </Typography>
         <Typography variant="body1" sx={{ color: blueGrey[50], textAlign: 'center' }}>
-          Hello world ! I'm Jonathan Dancette, Web developper. I am open-minded boy who likes discover new things. 
+          Hello world ! I'm Jonathan Dancette, Web developer. I am open-minded boy who likes discover new things. 
         </Typography>
         <Alert severity="success">Open for a job in Web development</Alert>
       </Stack>
@@ -256,7 +256,7 @@ const ContactMe = () => {
             <AccordionInfos 
               id='aexae'
               title='AEXAE'
-              object='Web developper Front : REACT JS & Back : PHP, Laravel, NodeJS'
+              object='Front-end Web developer : REACT JS & Back-end : PHP, Laravel, NodeJS'
               expanded
               logo={Aexae}
               isMobile={isMobile}
@@ -269,13 +269,13 @@ const ContactMe = () => {
             <AccordionInfos 
               id='logic-immo'
               title='Logic-Immo'
-              object='Web developper Back-end PHP, Zend Framework 2'
+              object='Back-end Web developer PHP, Zend Framework 2'
               logo={LogicImmo}
               isMobile={isMobile}
               period='2018 - 2019'
               infos='
                   Search Engine Optimization (SEO) of Logic-Immo sites. 
-                  Developpment in PHP with Zend Framework 2. 
+                  Development in PHP with Zend Framework 2. 
                   Units testing.
                   Agile methodology.
                   '
@@ -283,7 +283,7 @@ const ContactMe = () => {
             <AccordionInfos 
               id='rci-bank-and-services'
               title='RCI Bank and Services'
-              object='Study contract, Web developper'
+              object='Study contract, Web developer'
               logo={RciBankAndServices}
               isMobile={isMobile}
               period='2013 - 2017'
