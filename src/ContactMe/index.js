@@ -4,7 +4,7 @@ import moment from 'moment';
 import { fetchApi } from '../api';
 // Components
 import { blue, blueGrey, grey, purple } from '@mui/material/colors';
-import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Skeleton, Stack, Toolbar, Typography, useScrollTrigger } from '@mui/material';
+import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Skeleton, Stack, Toolbar, Typography } from '@mui/material';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import { useTheme } from '@mui/material/styles';
 // Logos
@@ -396,13 +396,14 @@ const ContactMe = () => {
               link='https://myjooeee.github.io/air-flow/'
             />
              <Project 
-              title='Build sentences fr ©'
+              title='Gutenberg open data ©'
               description='Analyze structure of french words and generation of new words 
                           based on analysis of more than 300 000 words.
+                          Project that can work with any other language dictionary.
                         '
               skills={['PHP', 'Composer', 'POO', 'Dependency injection', 'Services', 'Recursive function', 'Data']}
               infoLink='Access to the Project'
-              link='https://github.com/MyJooeee/build-sentences-fr'
+              link='https://github.com/MyJooeee/gutenberg-open-data'
             />
             <Project 
               title='Pendulum ©'
