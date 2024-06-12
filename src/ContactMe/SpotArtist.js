@@ -19,14 +19,14 @@ const SpotArtist = ({ followers, genres, href, image, name }) => {
           <Typography variant="h5" component="div">
             {name}
           </Typography>
+          <Typography variant="caption" color="text.secondary">
+            Followers on Spotify : <strong>{followers}</strong>.
+          </Typography>
           <Stack direction='row' sx={{flexWrap: 'wrap', gap: 0.5}}>
               {genres.map((genre, idx) => (
                 <Chip key={idx} label={genre} sx={{ backgroundColor: green.A400}} />
               ))}
           </Stack>
-          <Typography variant="caption" color="text.secondary">
-            Number of followers on Spotify : <strong>{followers}</strong>.
-          </Typography>
         </Stack>
       </CardContent>
       <CardActions sx={{ justifyContent: 'center' }}>

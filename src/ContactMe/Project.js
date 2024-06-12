@@ -21,7 +21,7 @@ const Project = ({description, infoLink, link, skills, title}) => {
               <Chip key={idx} label={item} color="primary" />
             ))}
           </Stack>
-          <Stack direction='row' sx={{alignItems: 'center', justifyContent: 'center', gap: 1}}>
+          <Stack direction='row' sx={{alignItems: 'center', justifyContent: 'center', gap: 0.5}}>
             <Typography variant='caption'>{infoLink} :</Typography>
             <Link target="_blank" variant='caption' href={link} underline="none">{title}</Link> 
           </Stack>

@@ -392,7 +392,7 @@ const ContactMe = () => {
                         Also provides weather information.
                       '
               skills={['REACT JS', 'HTML5/CSS3', 'MUI', 'Skeleton', 'Flexbox', 'Leaflet', 'NPM', 'API OpenWeather', 'Functional components']}
-              infoLink='Access to the App'
+              infoLink='App here'
               link='https://myjooeee.github.io/air-flow/'
             />
              <Project 
@@ -402,14 +402,14 @@ const ContactMe = () => {
                           Project that can work with any other language dictionary.
                         '
               skills={['PHP', 'Composer', 'POO', 'Dependency injection', 'Services', 'Recursive function', 'Data']}
-              infoLink='Access to the Project'
+              infoLink='Project here'
               link='https://github.com/MyJooeee/gutenberg-open-data'
             />
             <Project 
               title='Pendulum ©'
               description='Simulation of a simple pendulum based on the equations of pendulum motion.'
                         skills={['REACT JS', 'MUI', 'Flexbox', 'Canvas', 'Animation Frame', 'Physic']}
-              infoLink='Access to the App'
+              infoLink='App here'
               link='https://myjooeee.github.io/pendulum/'
             />
           </Stack>
