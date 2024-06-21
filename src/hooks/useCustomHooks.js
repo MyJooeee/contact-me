@@ -3,10 +3,18 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useMediaQueries = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isSmallDevice = useMediaQuery(theme.breakpoints.down('lg'));
+  /*
+    MUI breakpoints
+    xs : 0 : extra-small device
+    sm : [0 ; 600] : small device
+    md : [600 ; 900] : medium device
+    lg : [900 ; 1200] : large device
+    xl : [1200 ; 1536] : extra-large device
+  */
+  const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMediumDevice = useMediaQuery(theme.breakpoints.down('md'));
 
-  return { isMobile, isSmallDevice };
+  return { isSmallDevice, isMediumDevice };
 };
 
 export { useMediaQueries };

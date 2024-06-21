@@ -5,13 +5,13 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 
 // ---------------------------------------------------------------------------------
-const Contact = ({ onClick }) => {
+const Contact = ({onClick}) => {
   return (
     <Button 
       variant="contained"
       size="small"
       color='secondary'
-      endIcon={<SendIcon sx={{ width: 12, height: 12 }} />} 
+      endIcon={<SendIcon sx={{width: 12, height: 12}} />} 
       sx={{
         position: 'fixed',
         right: 5, 

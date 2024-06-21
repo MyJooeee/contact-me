@@ -5,9 +5,9 @@ import { Card, CardContent, Chip, Link, Stack, Typography   } from '@mui/materia
 
 const Project = ({description, infoLink, link, skills, title}) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{maxWidth: 345}}>
       <CardContent>
-        <Stack sx={{ gap: 2 }}> 
+        <Stack sx={{gap: 2}}> 
           <Stack> 
             <Typography gutterBottom variant="h5" component="div">
               {title}

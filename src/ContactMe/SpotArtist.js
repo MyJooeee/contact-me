@@ -5,17 +5,17 @@ import { green } from '@mui/material/colors';
 import { Card, CardActions, CardContent, CardMedia, Chip, Button, Typography, Stack } from '@mui/material';
 
 // ---------------------------------------------------------------------------------
-const SpotArtist = ({ followers, genres, href, image, name }) => {
+const SpotArtist = ({followers, genres, href, image, name}) => {
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{maxWidth: 345}}>
       <CardMedia
         sx={{ height: image.height, width: image.width }}
         image={image.url}
         title={name}
       />
       <CardContent>
-        <Stack sx={{ gap: 2 }}> 
+        <Stack sx={{gap: 2}}> 
           <Typography variant="h5" component="div">
             {name}
           </Typography>
@@ -29,7 +29,7 @@ const SpotArtist = ({ followers, genres, href, image, name }) => {
           </Stack>
         </Stack>
       </CardContent>
-      <CardActions sx={{ justifyContent: 'center' }}>
+      <CardActions sx={{justifyContent: 'center'}}>
         <Button size="small" target="_blank" href={href}>Discover</Button>
       </CardActions>
     </Card>

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { Box, Card, CardMedia, CardContent, Link, Typography   } from '@mui/material';
 
 // ---------------------------------------------------------------------------------
-const Hobby = ({ image, alt, ownerImage, title, description }) => {
+const Hobby = ({image, alt, ownerImage, title, description}) => {
     return (
-      <Card sx={{ maxWidth: 345 }}>
-        <Box sx={{ position: 'relative' }}>
+      <Card sx={{maxWidth: 345}}>
+        <Box sx={{position: 'relative'}}>
           <CardMedia
             component="img"
             height="140"

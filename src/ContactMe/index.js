@@ -39,7 +39,7 @@ const ContactMe = () => {
   const topSpotArtists = process.env.REACT_APP_SPOTIFY_MY_TOP_ARTISTS;
 
   const theme = useTheme();
-  const { isMobile, isSmallDevice } = useMediaQueries();
+  const {isSmallDevice, isMediumDevice} = useMediaQueries();
   const [navMenuId, setNavMenuId] = useState('home-section');
   const sections = useRef([]);
   const refHome = useRef();
@@ -209,20 +209,20 @@ const ContactMe = () => {
           gap: 1, 
           p: 1 
         }}>
-        <Avatar alt="Jonathan Dancette" src={Jonathan} sx={{ width: 96, height: 96 }} />
-        <Typography variant="h4" sx={{ color: 'white' }}>
+        <Avatar alt="Jonathan Dancette" src={Jonathan} sx={{width: 96, height: 96}} />
+        <Typography variant="h4" sx={{color: 'white'}}>
           Jonathan Dancette
         </Typography>
-        <Typography variant="h5" sx={{ color: blueGrey[50] }}>
+        <Typography variant="h5" sx={{color: blueGrey[50]}}>
           Web developer
         </Typography>
-        <Typography variant="body1" sx={{ color: blueGrey[50], textAlign: 'center' }}>
+        <Typography variant="body1" sx={{color: blueGrey[50], textAlign: 'center'}}>
           Hello world ! I'm Jonathan Dancette, Web developer. I am open-minded boy who likes discover new things. 
         </Typography>
         <Alert severity="success">Open for a job in Web development</Alert>
       </Stack>
       <AppBar position="sticky">
-        <Toolbar disableGutters sx={{ columnGap: 2, pl: 5, flexWrap: 'wrap' }}>
+        <Toolbar disableGutters sx={{columnGap: 2, pl: 5, flexWrap: 'wrap'}}>
           {navItems.map((item, idx) => (
             <Button
               key={idx}
@@ -244,22 +244,22 @@ const ContactMe = () => {
           backgroundColor: grey[200],
           gap: 5,
           py: 2, 
-          pl: isMobile ? 2 : 5, 
-          pr: isMobile ? 5 : isSmallDevice ? 15 : 25
+          pl: isSmallDevice ? 2 : 5, 
+          pr: isSmallDevice ? 5 : isMediumDevice ? 10 : 25
         }}>
-        <Stack id='experiences-section' data-section ref={refExperiences} sx={{ gap: 2 }}>
+        <Stack id='experiences-section' data-section ref={refExperiences} sx={{gap: 2}}>
           <Typography variant="h4">
             Experiences
           </Typography>
-          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
-          <Stack sx={{ pl:2 }}>
+          <Divider sx={{bgcolor: theme.palette.info.light}}/>
+          <Stack sx={{pl:2}}>
             <AccordionInfos 
               id='aexae'
               title='AEXAE'
               object='Front-end Web developer : REACT JS & Back-end : PHP, Laravel, NodeJS'
               expanded
               logo={Aexae}
-              isMobile={isMobile}
+              isSmallDevice={isSmallDevice}
               period='2020 - 2024'
               infos='Front side : interfaces with REACT JS. Automated testing with Mocha. 
                     WebService side : NodeJS.
@@ -271,7 +271,7 @@ const ContactMe = () => {
               title='Logic-Immo'
               object='Back-end Web developer PHP, Zend Framework 2'
               logo={LogicImmo}
-              isMobile={isMobile}
+              isSmallDevice={isSmallDevice}
               period='2018 - 2019'
               infos='
                   Search Engine Optimization (SEO) of Logic-Immo sites. 
@@ -285,7 +285,7 @@ const ContactMe = () => {
               title='RCI Bank and Services'
               object='Study contract, Web developer'
               logo={RciBankAndServices}
-              isMobile={isMobile}
+              isSmallDevice={isSmallDevice}
               period='2013 - 2017'
               infos='
                   Participation in mainframe to open migration project. 
@@ -295,19 +295,19 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack id='curriculum-section' data-section ref={refCurriculum} sx={{ gap: 2 }}>
+        <Stack id='curriculum-section' data-section ref={refCurriculum} sx={{gap: 2}}>
           <Typography variant="h4">
           Curriculum
           </Typography>
-          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
-          <Stack sx={{ pl: 2 }}>
+          <Divider sx={{bgcolor: theme.palette.info.light}}/>
+          <Stack sx={{pl: 2}}>
           <AccordionInfos 
               id='esgi-master'
               title='ESGI, Master'
               object='Expert diploma in computer science and information systems engineering'
               expanded
               logo={Esgi}
-              isMobile={isMobile}
+              isSmallDevice={isSmallDevice}
               period='2015 - 2017'
               infos='Degree recognized by the state level 1. 
                     Theoretical and practical learning through Web projects. 
@@ -319,7 +319,7 @@ const ContactMe = () => {
               title='ESGI, Licence'
               object='Software and network project manager diploma'
               logo={Esgi}
-              isMobile={isMobile}
+              isSmallDevice={isSmallDevice}
               period='2014 - 2015'
               infos='Degree recognized by the state level 2. 
                     Acquisition of advanced computer skills.
@@ -330,18 +330,18 @@ const ContactMe = () => {
               title='ITIS, BTS'
               object='IT services for organizations, development option'
               logo={Itis}
-              isMobile={isMobile}
+              isSmallDevice={isSmallDevice}
               period='2012 - 2014'
               infos='Applications development and maintenance, user support.'
             />
           </Stack>
         </Stack>
-        <Stack id='skills-section' data-section ref={refSkills} sx={{ gap: 2 }}>
+        <Stack id='skills-section' data-section ref={refSkills} sx={{gap: 2}}>
           <Typography variant="h4">
             Skills
           </Typography>
-          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
-          <Stack sx={{ gap: 2, pl: 2 }}>
+          <Divider sx={{bgcolor: theme.palette.info.light}}/>
+          <Stack sx={{gap: 2, pl: 2}}>
             <Skills 
               title='Languages'
               data={[
@@ -361,7 +361,7 @@ const ContactMe = () => {
               <Skills 
                   title='Technologies'
                   data={[
-                    {key: 'NodeJS', value: 60},
+                    {key: 'NodeJS', value: 70},
                     {key: 'MySQL', value: 75},
                     {key: 'Git', value: 90}
               ]}/>
@@ -379,12 +379,12 @@ const ContactMe = () => {
               ]}/>
           </Stack>
         </Stack>
-        <Stack id='projects-section' data-section ref={refProjects} sx={{ gap: 2 }}>
+        <Stack id='projects-section' data-section ref={refProjects} sx={{gap: 2}}>
           <Typography variant="h4">
             Projects
           </Typography>
-          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
-          <Stack direction='row' sx={{ gap: 2, pl: 2, flexWrap: 'wrap' }}>
+          <Divider sx={{bgcolor: theme.palette.info.light}}/>
+          <Stack direction='row' sx={{gap: 2, pl: 2, flexWrap: 'wrap'}}>
             <Project 
               title='Air Flow ©'
               description='
@@ -414,12 +414,12 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack id='hobbies-section' data-section ref={refHobbies} sx={{ gap: 2 }}>
+        <Stack id='hobbies-section' data-section ref={refHobbies} sx={{gap: 2}}>
           <Typography variant="h4">
             Hobbies
           </Typography>
-          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
-          <Stack direction='row' sx={{ gap: 2, pl: 2, flexWrap: 'wrap' }}>
+          <Divider sx={{bgcolor: theme.palette.info.light}}/>
+          <Stack direction='row' sx={{gap: 2, pl: 2, flexWrap: 'wrap'}}>
             <Hobby 
               title='Running'
               description="I try to run regularly or even walk to clear my head and stay cool."
@@ -443,12 +443,12 @@ const ContactMe = () => {
             />
           </Stack>
         </Stack>
-        <Stack id='musics-section' data-section ref={refMusics} sx={{ gap: 2 }}>
+        <Stack id='musics-section' data-section ref={refMusics} sx={{gap: 2}}>
           <Typography variant="h4">
             My favorite artists
           </Typography>
-          <Divider sx={{ bgcolor: theme.palette.info.light }}/>
-          <Stack direction='row' sx={{ gap: 2, pl: 2, flexWrap: 'wrap' }}>
+          <Divider sx={{bgcolor: theme.palette.info.light}}/>
+          <Stack direction='row' sx={{gap: 2, pl: 2, flexWrap: 'wrap'}}>
             {loadingSpot && [0, 1, 2, 3, 4].map((idx) => (
             <Skeleton key={idx} animation='wave' variant='rectangular' width={345} height={345} />
             ))}
@@ -487,7 +487,7 @@ const ContactMe = () => {
             py: 1, 
             pl: 5 
           }}>
-          <Typography variant="body2" sx={{ color: 'white' }}>© 2024 Jonathan Dancette, all rights reserved. | v{APP_VERSION}</Typography>
+          <Typography variant="body2" sx={{color: 'white'}}>© 2024 Jonathan Dancette, all rights reserved. | v{APP_VERSION}</Typography>
         </Stack>
       </Stack>
       <Drawer
