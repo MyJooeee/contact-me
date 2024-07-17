@@ -489,7 +489,7 @@ const ContactMe = () => {
             py: 1, 
             pl: 5 
           }}>
-          <Typography variant="body2" sx={{color: 'white'}}>© 2024 Jonathan Dancette, all rights reserved. | v{APP_VERSION}</Typography>
+          <Typography variant="body2" sx={{color: 'white'}}>© {new Date().getFullYear()} Jonathan Dancette, all rights reserved. | v{APP_VERSION}</Typography>
         </Stack>
       </Stack>
       <Drawer
