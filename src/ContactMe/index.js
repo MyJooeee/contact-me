@@ -219,7 +219,9 @@ const ContactMe = () => {
         <Typography variant="body1" sx={{color: blueGrey[50], textAlign: 'center'}}>
           Hello world ! I'm Jonathan Dancette, Web developer. I am open-minded boy who likes discover new things. 
         </Typography>
-        <Alert severity="success">Open for a job in Web development</Alert>
+        <Alert severity="info">
+          I am no longer looking for work. But keep in touch !
+        </Alert>
       </Stack>
       <AppBar position="sticky">
         <Toolbar disableGutters sx={{columnGap: 2, pl: 5, flexWrap: 'wrap'}}>
@@ -477,7 +479,7 @@ const ContactMe = () => {
           }}>
           <Link color='white' target="_blank" variant='caption' href='https://fr.linkedin.com/in/jonathan-dancette-72627a61' underline="none">Linkedin</Link> 
           <Link color='white' target="_blank" variant='caption' href='https://github.com/MyJooeee' underline="none">Github</Link> 
-          <Link color='white' target="_blank" variant='caption' href='http://hypersciences.space' underline="none">HyperSciences</Link> 
+          <Link color='white' target="_blank" variant='caption' href='https://hypersciences.wordpress.com' underline="none">HyperSciences</Link> 
         </Stack>
         <Stack 
           direction="row" 
