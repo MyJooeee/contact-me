@@ -368,7 +368,7 @@ const ContactMe = () => {
                     {key: 'Git', value: 90}
               ]}/>
               <Skills 
-                  title='Librairies'
+                  title='Libraries'
                   data={[
                     {key: 'REACT JS', value: 85},
                     {key: 'MUI', value: 85},
