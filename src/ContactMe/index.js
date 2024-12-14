@@ -96,8 +96,8 @@ const ContactMe = () => {
     sections.current = document.querySelectorAll('[data-section]');
     window.addEventListener('scroll', handleScroll);
 
-    const localToken = localStorage.getItem("accessToken");
-    const localTokenTime = localStorage.getItem("accessTokenTime");
+    const localToken = localStorage.getItem("accessTokenX");
+    const localTokenTime = localStorage.getItem("accessTokenTimeX");
     const seconds = moment().diff(moment(localTokenTime), 'seconds');
 
     // Token is still valid
@@ -113,8 +113,8 @@ const ContactMe = () => {
           setArtistsSpot(data);
           setLoadingSpot(false);
         });
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("accessTokenTime", moment().format("YYYY-MM-DD HH:mm:ss"));
+        localStorage.setItem("accessTokenX", accessToken);
+        localStorage.setItem("accessTokenTimeX", moment().format("YYYY-MM-DD HH:mm:ss"));
       });
     }
 
@@ -349,6 +349,7 @@ const ContactMe = () => {
               data={[
                 {key: 'PHP', value: 90},
                 {key: 'JS', value: 80},
+                {key: 'TypeScript (JS Superset)', value: 70},
                 {key: 'HTML5/CSS3', value: 75}
 
               ]}/>
@@ -357,7 +358,7 @@ const ContactMe = () => {
                   data={[
                     {key: 'Laravel', value: 80},
                     {key: 'Zend Framework 2', value: 60},
-                    {key: 'Symfony', value: 50},
+                    {key: 'Symfony', value: 60},
                     {key: 'PHP MVC', value: 95}
               ]}/>
               <Skills 
