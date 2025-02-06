@@ -1,19 +1,21 @@
 {
   "name": "contact-me",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "homepage": "https://MyJooeee.github.io/contact-me",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^5.16.11",
-    "@mui/material": "^5.16.11",
+    "@mui/icons-material": "^5.16.14",
+    "@mui/material": "^5.16.14",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-google-recaptcha": "^3.1.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -44,6 +46,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.2.0"
+    "gh-pages": "^6.3.0"
   }
 }

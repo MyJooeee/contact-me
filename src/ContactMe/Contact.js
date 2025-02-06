@@ -9,7 +9,7 @@ const Contact = ({onClick}) => {
   return (
     <Button 
       variant="contained"
-      size="small"
+      size="medium"
       color='secondary'
       endIcon={<SendIcon sx={{width: 12, height: 12}} />} 
       sx={{

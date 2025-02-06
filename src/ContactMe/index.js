@@ -3,9 +3,9 @@ import { useState, useRef, useEffect } from 'react';
 import moment from 'moment';
 import { fetchApi } from '../api';
 // Components
-import { blue, blueGrey, grey, purple } from '@mui/material/colors';
-import { Alert, AppBar, Avatar, Button, Container, Divider, Drawer, Link, Skeleton, Stack, Toolbar, Typography } from '@mui/material';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
+import { blue, blueGrey, grey } from '@mui/material/colors';
+import { Alert, AppBar, Avatar, Box, Button, Container, Divider, Drawer, IconButton, Link, Skeleton, Stack, Toolbar, Typography } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
 // Logos
 import Aexae from '../Media/Logos/aexae.png';
@@ -22,6 +22,7 @@ import MilkyWay from '../Media/Images/milky-way-galaxy.jpg';
 // Local components
 import AccordionInfos from './AccordionInfos';
 import Contact from './Contact';
+import ContactForm from './ContactForm';
 import Skills from './Skills';
 import Project from './Project';
 import Hobby from './Hobby';
@@ -96,8 +97,8 @@ const ContactMe = () => {
     sections.current = document.querySelectorAll('[data-section]');
     window.addEventListener('scroll', handleScroll);
 
-    const localToken = localStorage.getItem("accessTokenX");
-    const localTokenTime = localStorage.getItem("accessTokenTimeX");
+    const localToken = localStorage.getItem("OFKEHBDKHQBXY");
+    const localTokenTime = localStorage.getItem("DIDJFLSBFYABDSSFZ");
     const seconds = moment().diff(moment(localTokenTime), 'seconds');
 
     // Token is still valid
@@ -113,8 +114,8 @@ const ContactMe = () => {
           setArtistsSpot(data);
           setLoadingSpot(false);
         });
-        localStorage.setItem("accessTokenX", accessToken);
-        localStorage.setItem("accessTokenTimeX", moment().format("YYYY-MM-DD HH:mm:ss"));
+        localStorage.setItem("OFKEHBDKHQBXY", accessToken);
+        localStorage.setItem("DIDJFLSBFYABDSSFZ", moment().format("YYYY-MM-DD HH:mm:ss"));
       });
     }
 
@@ -496,19 +497,35 @@ const ContactMe = () => {
       <Drawer
         anchor='bottom'
         open={openDrawer}
-        onClose={toggleDrawer(false)}>
-       <Stack 
-          direction='row' 
+        onClose={toggleDrawer(false)}
+      >
+        <Box 
           sx={{ 
-            backgroundColor: purple[50],
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            p: 3, 
-            gap: 2
-        }}>
-          <ContactMailIcon />
-          <Typography variant='overline'>To get my CV or just contact me : dancette.jonathan@gmail.com</Typography>
-       </Stack>
+            position: 'relative',
+            maxHeight: '90vh',  
+            overflowY: 'auto'
+          }}
+        >
+          <Box 
+            component="header"
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              p: 1,
+              bgcolor: 'background.paper',
+              borderBottom: '1px solid',
+              borderColor: 'divider'
+            }}
+          >
+            <IconButton 
+              onClick={toggleDrawer(false)}
+              aria-label="Close form" // accessibilité
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <ContactForm />
+        </Box>
       </Drawer>
       <Contact onClick={toggleDrawer(true)} />
     </Container>
