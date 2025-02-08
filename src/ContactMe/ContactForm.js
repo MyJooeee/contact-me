@@ -15,7 +15,7 @@ const MSERVICE_ID = process.env.REACT_APP_MSERVICE_ID;
 const MTEMPLATE_ID = process.env.REACT_APP_MTEMPLATE_ID;
 const MPUBLIC_KEY = process.env.REACT_APP_MPUBLIC_KEY;
 const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
-const STORAGE_KEY = 'HFJIEKHXNSHDKUDHVX';
+const KEY_Z = process.env.REACT_APP_KEY_Z;
 
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,7 +34,7 @@ const containsSuspiciousContent = (text) => {
 };
 
 const canSendEmail = () => {
-  const lastSentTime = localStorage.getItem(STORAGE_KEY);
+  const lastSentTime = localStorage.getItem(KEY_Z);
   if (!lastSentTime) return true;
 
   const lastSent = new Date(lastSentTime);
@@ -145,7 +145,7 @@ const ContactForm = () => {
       );
 
       if (response.status === 200) {
-        localStorage.setItem(STORAGE_KEY, new Date().toISOString());
+        localStorage.setItem(KEY_Z, new Date().toISOString());
         
         setFormData({
           name: '',

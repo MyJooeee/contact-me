@@ -38,6 +38,8 @@ const ContactMe = () => {
   const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
   const urlSpotArtists = process.env.REACT_APP_SPOTIFY_URL_ARTISTS;
   const topSpotArtists = process.env.REACT_APP_SPOTIFY_MY_TOP_ARTISTS;
+  const KEY_X = process.env.REACT_APP_KEY_X;
+  const KEY_Y = process.env.REACT_APP_KEY_Y;
 
   const theme = useTheme();
   const {isSmallDevice, isMediumDevice} = useMediaQueries();
@@ -97,8 +99,8 @@ const ContactMe = () => {
     sections.current = document.querySelectorAll('[data-section]');
     window.addEventListener('scroll', handleScroll);
 
-    const localToken = localStorage.getItem("OFKEHBDKHQBXY");
-    const localTokenTime = localStorage.getItem("DIDJFLSBFYABDSSFZ");
+    const localToken = localStorage.getItem(KEY_X);
+    const localTokenTime = localStorage.getItem(KEY_Y);
     const seconds = moment().diff(moment(localTokenTime), 'seconds');
 
     // Token is still valid
@@ -114,8 +116,8 @@ const ContactMe = () => {
           setArtistsSpot(data);
           setLoadingSpot(false);
         });
-        localStorage.setItem("OFKEHBDKHQBXY", accessToken);
-        localStorage.setItem("DIDJFLSBFYABDSSFZ", moment().format("YYYY-MM-DD HH:mm:ss"));
+        localStorage.setItem(KEY_X, accessToken);
+        localStorage.setItem(KEY_Y, moment().format("YYYY-MM-DD HH:mm:ss"));
       });
     }
 
@@ -221,7 +223,7 @@ const ContactMe = () => {
           Hello world ! I'm Jonathan Dancette, Web developer. I am open-minded boy who likes discover new things. 
         </Typography>
         <Alert severity="info">
-          I am no longer looking for work. But keep in touch !
+          Open to exploring exciting challenges and opportunities in Web development.
         </Alert>
       </Stack>
       <AppBar position="sticky">
