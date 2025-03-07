@@ -1,7 +1,7 @@
 // Core
 import { useState, useRef, useEffect } from 'react';
-import moment from 'moment';
 import { fetchApi } from '../api';
+import alphaEncryptor from '../utils';
 // Components
 import { blue, blueGrey, grey } from '@mui/material/colors';
 import { Alert, AppBar, Avatar, Box, Button, Container, Divider, Drawer, IconButton, Link, Skeleton, Stack, Toolbar, Typography } from '@mui/material';
@@ -94,32 +94,15 @@ const ContactMe = () => {
   const [loadingSpot, setLoadingSpot] = useState(true);
   const [artistsSpot, setArtistsSpot] = useState(null);
 
+
   // Effects ---------------------------------------------------------------------
   useEffect(() => {
+    // Configuration de l'écouteur de défilement pour le menu
     sections.current = document.querySelectorAll('[data-section]');
     window.addEventListener('scroll', handleScroll);
 
-    const localToken = localStorage.getItem(KEY_X);
-    const localTokenTime = localStorage.getItem(KEY_Y);
-    const seconds = moment().diff(moment(localTokenTime), 'seconds');
-
-    // Token is still valid
-    if (localToken && seconds < 3600) {
-      getSpotifyData(localToken).then((data) => {
-        setArtistsSpot(data);
-        setLoadingSpot(false);
-      });
-    // If no token or expired : new token
-    } else {
-      getAccessToken().then((accessToken) => {
-        getSpotifyData(accessToken).then((data) => {
-          setArtistsSpot(data);
-          setLoadingSpot(false);
-        });
-        localStorage.setItem(KEY_X, accessToken);
-        localStorage.setItem(KEY_Y, moment().format("YYYY-MM-DD HH:mm:ss"));
-      });
-    }
+    // Récupération des données Spotify avec gestion sécurisée du token
+    handleSpotifyAuthentication();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -127,6 +110,76 @@ const ContactMe = () => {
   }, []);
 
   // Functions -------------------------------------------------------------------  
+  const handleSpotifyAuthentication = () => {
+    try {
+      // Récupération sécurisée des données du localStorage
+      const localToken = localStorage.getItem(KEY_X);
+      
+      // Récupération sécurisée du timestamp avec la nouvelle méthode getFromStorage
+      const tokenTimestamp = alphaEncryptor.getFromStorage(KEY_Y);
+      
+      // Variable pour déterminer si le token existant est valide
+      let useExistingToken = false;
+      let token = null;
+
+      // Vérification du token local et de sa validité
+      if (localToken && tokenTimestamp) {
+        try {
+          // Vérification de la validité du token (moins d'une heure)
+          const stillValid = (new Date() - new Date(tokenTimestamp)) < 3600000;
+          
+          // Si le token est toujours valide, on l'utilise
+          if (stillValid) {
+            useExistingToken = true;
+            token = localToken;
+          }
+        } catch (dateError) {
+          console.error('Erreur lors de la validation de la date du token:', dateError);
+          // En cas d'erreur, on considère que le token n'est pas valide
+        }
+      }
+
+      // Obtention d'un nouveau token si nécessaire
+      if (!useExistingToken) {
+        getAccessToken().then((accessToken) => {
+          if (accessToken) {
+            token = accessToken;
+            
+            // Sauvegarde du nouveau token
+            localStorage.setItem(KEY_X, accessToken);
+            
+            // Enregistrement sécurisé de l'horodatage avec la nouvelle méthode saveToStorage
+            alphaEncryptor.saveToStorage(KEY_Y, new Date().toISOString());
+            
+            // Récupération des données avec le nouveau token
+            getSpotifyData(token).then((data) => {
+              setArtistsSpot(data);
+              setLoadingSpot(false);
+            });
+          } else {
+            setLoadingSpot(false);
+            console.error('Impossible d\'obtenir un token Spotify');
+          }
+        }).catch(error => {
+          setLoadingSpot(false);
+          console.error('Erreur lors de l\'authentification Spotify:', error);
+        });
+      } else {
+        // Utilisation du token existant
+        getSpotifyData(token).then((data) => {
+          setArtistsSpot(data);
+          setLoadingSpot(false);
+        }).catch(error => {
+          setLoadingSpot(false);
+          console.error('Erreur lors de la récupération des données Spotify:', error);
+        });
+      }
+    } catch (error) {
+      setLoadingSpot(false);
+      console.error('Erreur globale lors de l\'authentification Spotify:', error);
+    }
+  };
+
   const getAccessToken = async () => {
     try {
       const authOptions = {
@@ -139,21 +192,28 @@ const ContactMe = () => {
         json: true
       };
       const response = await fetchApi(`${urlSpotAccessToken}`, authOptions, (error) => {
-        console.log(error);
-        return;
+        console.error('Erreur lors de la récupération du token Spotify:', error);
+        return null;
       });
-      if (response.error) {
-        console.log(response.error);
-        return;
+      
+      if (response?.error) {
+        console.error('Erreur retournée par l\'API Spotify:', response.error);
+        return null;
       }
-      return response.access_token;
+      
+      return response?.access_token || null;
     } catch (error) {
-      console.log(error);
-      return;
+      console.error('Exception lors de la récupération du token Spotify:', error);
+      return null;
     }
   };
 
   const getSpotifyData = async (token) => {
+    if (!token) {
+      console.error('Token manquant pour la récupération des données Spotify');
+      return null;
+    }
+    
     try {
       const authOptions = {
         method: 'GET',
@@ -162,14 +222,14 @@ const ContactMe = () => {
         }
       };
       const response = await fetchApi(`${urlSpotArtists}?ids=${topSpotArtists}`, authOptions, (error) => {
-        console.log(error);
-        return;
+        console.error('Erreur lors de la récupération des artistes Spotify:', error);
+        return null;
       });
 
       return response;
     } catch (error) {
-      console.log(error);
-      return;
+      console.error('Exception lors de la récupération des artistes Spotify:', error);
+      return null;
     }
   };
 

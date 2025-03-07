@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import alphaEncryptor from '../utils';
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from '@emailjs/browser';
 import {
@@ -34,12 +35,29 @@ const containsSuspiciousContent = (text) => {
 };
 
 const canSendEmail = () => {
-  const lastSentTime = localStorage.getItem(KEY_Z);
-  if (!lastSentTime) return true;
-
-  const lastSent = new Date(lastSentTime);
-  const now = new Date();
-  return (now - lastSent) >= 3600000;
+  try {
+    // Récupération du timestamp avec la méthode sécurisée getFromStorage
+    const lastSentTimeStr = alphaEncryptor.getFromStorage(KEY_Z);
+    
+    // Si aucun timestamp n'existe ou si le déchiffrement a échoué, l'email peut être envoyé
+    if (!lastSentTimeStr) return true;
+    
+    try {
+      // Vérification du délai (1 heure = 3600000ms)
+      const lastSent = new Date(lastSentTimeStr);
+      const now = new Date();
+      return (now - lastSent) >= 3600000;
+    } catch (dateError) {
+      console.error('Format de date invalide:', dateError);
+      // En cas d'erreur de format de date, supprimer la valeur corrompue
+      localStorage.removeItem(KEY_Z);
+      return true;
+    }
+  } catch (error) {
+    console.error('Erreur lors de la vérification du délai d\'envoi:', error);
+    // En cas d'erreur, on permet l'envoi pour éviter de bloquer l'utilisateur
+    return true;
+  }
 };
 
 const ContactForm = () => {
@@ -95,11 +113,11 @@ const ContactForm = () => {
       newErrors.email = 'Invalid email format';
     }
 
-    if (formData.name.length > 20) {
-      newErrors.name = 'Name must not exceed 20 characters';
+    if (formData.name.length > 30) {
+      newErrors.name = 'Name must not exceed 30 characters';
     }
-    if (formData.subject.length > 20) {
-      newErrors.subject = 'Subject must not exceed 20 characters';
+    if (formData.subject.length > 50) {
+      newErrors.subject = 'Subject must not exceed 50 characters';
     }
     if (formData.message.length > 250) {
       newErrors.message = 'Message must not exceed 250 characters';
@@ -121,7 +139,7 @@ const ContactForm = () => {
     if (!canSendEmail()) {
       setSubmitStatus({
         type: 'error',
-        message: 'Please try again later'
+        message: 'Please wait at least one hour between emails'
       });
       return;
     }
@@ -145,8 +163,14 @@ const ContactForm = () => {
       );
 
       if (response.status === 200) {
-        localStorage.setItem(KEY_Z, new Date().toISOString());
+        // Enregistrement sécurisé de l'horodatage avec la nouvelle méthode saveToStorage
+        const saveResult = alphaEncryptor.saveToStorage(KEY_Z, new Date().toISOString());
         
+        if (!saveResult) {
+          console.warn('Avertissement: Impossible d\'enregistrer le timestamp d\'envoi');
+        }
+        
+        // Réinitialisation du formulaire
         setFormData({
           name: '',
           email: '',
