@@ -4,6 +4,7 @@ name: Deploy from gh-pages
 on:
   push:
     branches: [ gh-pages ]  # Déclenche le déploiement sur push vers gh-pages
+  workflow_dispatch:
 
 jobs:
   deploy:
