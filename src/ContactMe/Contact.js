@@ -20,7 +20,7 @@ const Contact = ({onClick}) => {
         textTransform: 'none'
       }}
       onClick={onClick}>
-      Contact me
+      Contact me :)
     </Button>
   );
 };

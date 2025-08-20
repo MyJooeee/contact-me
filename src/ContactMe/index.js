@@ -8,6 +8,7 @@ import { Alert, AppBar, Avatar, Box, Button, Container, Divider, Drawer, IconBut
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
 // Logos
+import Cashnow from '../Media/Logos/logo-light-cashnow.png';
 import Aexae from '../Media/Logos/aexae.png';
 import LogicImmo from '../Media/Logos/logic-immo.png';
 import RciBankAndServices from '../Media/Logos/rci-bank-and-services.png';
@@ -283,7 +284,7 @@ const ContactMe = () => {
           Hello world ! I'm Jonathan Dancette, Web developer. I am open-minded boy who likes discover new things. 
         </Typography>
         <Alert severity="info">
-          Open to exploring exciting challenges and opportunities in Web development.
+          Always interested in meaningful projects.
         </Alert>
       </Stack>
       <AppBar position="sticky">
@@ -318,11 +319,20 @@ const ContactMe = () => {
           </Typography>
           <Divider sx={{bgcolor: theme.palette.info.light}}/>
           <Stack sx={{pl:2}}>
+          <AccordionInfos 
+              id='cashnow'
+              title='Cashnow'
+              object='Senior Software Engineer : ReactJS, TypeScript, Symfony, Docker, Linux'
+              expanded
+              logo={Cashnow}
+              isSmallDevice={isSmallDevice}
+              period='2024 - now'
+              infos='Complete feature development, code quality improvement, unit testing (PHPUnit), pentest remediation & system maintenance.'
+            />
             <AccordionInfos 
               id='aexae'
               title='AEXAE'
               object='Front-end Web developer : REACT JS & Back-end : PHP, Laravel, NodeJS'
-              expanded
               logo={Aexae}
               isSmallDevice={isSmallDevice}
               period='2020 - 2024'
@@ -430,6 +440,12 @@ const ContactMe = () => {
                     {key: 'NodeJS', value: 70},
                     {key: 'MySQL', value: 75},
                     {key: 'Git', value: 90}
+              ]}/>
+              <Skills 
+                  title='DevOps & Infrastructure'
+                  data={[
+                    {key: 'Docker', value: 50},
+                    {key: 'GitHub Actions', value: 65}
               ]}/>
               <Skills 
                   title='Libraries'

@@ -1,0 +1,41 @@
+# .github/workflows/deploy.yml
+name: Deploy from gh-pages
+
+on:
+  push:
+    branches: [ gh-pages ]  # Déclenche le déploiement sur push vers gh-pages
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🚀 Pull latest changes on server
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        port: ${{ secrets.PORT }}
+        script: |
+          echo "🔌 Connexion SSH établie"
+          
+          # Passer en root et faire le pull
+          echo "${{ secrets.MASTER_PWD }}" | sudo -S su - << 'EOF'
+          
+          echo "📂 Navigation vers le répertoire du projet"
+          cd /var/www/html/contact-me
+          
+          echo "📥 Pull des modifications depuis gh-pages..."
+          git pull origin gh-pages
+          
+          echo "📋 Copie du fichier index.html vers la racine"
+          cp index.html ../index.html
+
+          echo "✅ Déploiement terminé le $(date)"
+          
+          exit
+          EOF
+          
+          echo "✨ Pull terminé"

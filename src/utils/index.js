@@ -36,35 +36,6 @@ class AlphaEncryptor {
   }
   
   /**
-   * Déchiffre une valeur précédemment chiffrée
-   * @param {string} encryptedValue - Valeur chiffrée
-   * @returns {string} - Valeur déchiffrée
-   */
-  decryptAlpha(encryptedValue) {
-    if (!this.encryptionKey) {
-      throw new Error('Clé de déchiffrement non configurée');
-    }
-    
-    if (!encryptedValue) {
-      throw new Error('Valeur à déchiffrer non définie');
-    }
-    
-    try {
-      const bytes = CryptoJS.AES.decrypt(encryptedValue, this.encryptionKey);
-      const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-      
-      if (!decrypted) {
-        throw new Error('Échec de déchiffrement - résultat vide');
-      }
-      
-      return decrypted;
-    } catch (error) {
-      console.error('Erreur lors du déchiffrement:', error);
-      throw new Error('Échec de déchiffrement');
-    }
-  }
-  
-  /**
    * Déchiffre une valeur et effectue un decodeURIComponent en toute sécurité
    * Version robuste qui gère les erreurs de format UTF-8
    * @param {string} encryptedValue - Valeur chiffrée
@@ -188,57 +159,6 @@ class AlphaEncryptor {
     } catch (error) {
       console.error('Erreur lors de la récupération depuis le localStorage:', error);
       return null;
-    }
-  }
-  
-  /**
-   * Test le processus complet de chiffrement/déchiffrement
-   * @param {string} testValue - Valeur à tester
-   * @returns {Object} Résultats du test
-   */
-  test(testValue) {
-    console.log("=== TEST DE CHIFFREMENT/DÉCHIFFREMENT ===");
-    console.log("Clé de chiffrement présente:", !!this.encryptionKey);
-    
-    try {
-      const encrypted = this.encryptAlpha(testValue);
-      console.log("Valeur chiffrée:", encrypted);
-      
-      const decrypted = this.decryptAlpha(encrypted);
-      console.log("Valeur déchiffrée:", decrypted);
-      console.log("Correspondance:", testValue === decrypted);
-      
-      // Test du localStorage
-      const testKey = "_test_alpha_encryptor_key";
-      console.log("Test de localStorage:");
-      
-      const saveResult = this.saveToStorage(testKey, testValue);
-      console.log("- Sauvegarde réussie:", saveResult);
-      
-      const retrievedValue = this.getFromStorage(testKey);
-      console.log("- Valeur récupérée:", retrievedValue);
-      console.log("- Correspondance:", testValue === retrievedValue);
-      
-      // Nettoyer après le test
-      localStorage.removeItem(testKey);
-      
-      return {
-        original: testValue,
-        encrypted: encrypted,
-        decrypted: decrypted,
-        storage: {
-          saved: saveResult,
-          retrieved: retrievedValue,
-          success: testValue === retrievedValue
-        },
-        success: testValue === decrypted && testValue === retrievedValue
-      };
-    } catch (error) {
-      console.error("Erreur lors du test:", error);
-      return {
-        error: error.message,
-        success: false
-      };
     }
   }
 }

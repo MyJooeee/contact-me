@@ -203,7 +203,7 @@ const ContactForm = () => {
   return (
     <Paper elevation={3} sx={{ p: 4, maxWidth: 600, mx: 'auto', mt: 4 }}>
       <Typography variant="h5" component="h2" gutterBottom>
-        Contact me
+        Contact me :)
       </Typography>
 
       <Box component="form" onSubmit={handleSubmit} noValidate>
