@@ -29,6 +29,6 @@ jobs:
           git pull origin gh-pages
           
           echo "📋 Copie du fichier index.html vers la racine"
-          sudo cp index.html ../index.html
+          cp index.html ../index.html
           
           echo "✅ Déploiement terminé le $(date)"
