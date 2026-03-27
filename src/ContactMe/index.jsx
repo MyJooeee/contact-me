@@ -43,7 +43,7 @@ const ContactMe = () => {
   const KEY_Y = import.meta.env.VITE_KEY_Y;
 
   const theme = useTheme();
-  const {isSmallDevice, isMediumDevice} = useMediaQueries();
+  const {isSmallDevice, isMediumDevice, isExtraLargeDevice} = useMediaQueries();
   const [navMenuId, setNavMenuId] = useState('home-section');
   const sections = useRef([]);
   const refHome = useRef();
@@ -295,7 +295,8 @@ const ContactMe = () => {
         data-section
         sx={{ 
           alignItems: 'center', 
-          backgroundImage: `url(${Earth})`, 
+          backgroundImage: isExtraLargeDevice ? `url(${Earth})` : 'none',
+          backgroundColor: isExtraLargeDevice ? 'transparent' : 'black',
           gap: 1, 
           p: 1 
         }}>
