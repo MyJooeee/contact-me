@@ -33,14 +33,14 @@ import SpotArtist from './SpotArtist';
 
 // ---------------------------------------------------------------------------------
 const ContactMe = () => {
-  const APP_VERSION = process.env.REACT_APP_VERSION;
-  const urlSpotAccessToken = process.env.REACT_APP_SPOTIFY_URL_ACCESS_TOKEN;
-  const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-  const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
-  const urlSpotArtists = process.env.REACT_APP_SPOTIFY_URL_ARTISTS;
-  const topSpotArtists = process.env.REACT_APP_SPOTIFY_MY_TOP_ARTISTS;
-  const KEY_X = process.env.REACT_APP_KEY_X;
-  const KEY_Y = process.env.REACT_APP_KEY_Y;
+  const APP_VERSION = import.meta.env.VITE_VERSION;
+  const urlSpotAccessToken = import.meta.env.VITE_SPOTIFY_URL_ACCESS_TOKEN;
+  const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+  const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+  const urlSpotArtists = import.meta.env.VITE_SPOTIFY_URL_ARTISTS;
+  const topSpotArtists = import.meta.env.VITE_SPOTIFY_MY_TOP_ARTISTS;
+  const KEY_X = import.meta.env.VITE_KEY_X;
+  const KEY_Y = import.meta.env.VITE_KEY_Y;
 
   const theme = useTheme();
   const {isSmallDevice, isMediumDevice} = useMediaQueries();

@@ -12,11 +12,11 @@ import {
   Paper,
 } from '@mui/material';
 
-const MSERVICE_ID = process.env.REACT_APP_MSERVICE_ID;
-const MTEMPLATE_ID = process.env.REACT_APP_MTEMPLATE_ID;
-const MPUBLIC_KEY = process.env.REACT_APP_MPUBLIC_KEY;
-const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
-const KEY_Z = process.env.REACT_APP_KEY_Z;
+const MSERVICE_ID = import.meta.env.VITE_MSERVICE_ID;
+const MTEMPLATE_ID = import.meta.env.VITE_MTEMPLATE_ID;
+const MPUBLIC_KEY = import.meta.env.VITE_MPUBLIC_KEY;
+const RECAPTCHA_KEY = import.meta.env.VITE_RECAPTCHA_KEY;
+const KEY_Z = import.meta.env.VITE_KEY_Z;
 
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

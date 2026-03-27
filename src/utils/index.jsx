@@ -5,7 +5,7 @@ import CryptoJS from 'crypto-js';
  */
 class AlphaEncryptor {
   constructor() {
-    this.encryptionKey = process.env.REACT_APP_ALPHA;
+    this.encryptionKey = import.meta.env.VITE_ALPHA;
     
     if (!this.encryptionKey) {
       console.error('Erreur: Clé de chiffrement non définie dans .env');
