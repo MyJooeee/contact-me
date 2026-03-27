@@ -1,5 +1,5 @@
 // Core
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { fetchApi } from '../api';
 import alphaEncryptor from '../utils';
 // Components
@@ -95,6 +95,10 @@ const ContactMe = () => {
   const [loadingSpot, setLoadingSpot] = useState(true);
   const [artistsSpot, setArtistsSpot] = useState(null);
 
+  // -- UI --
+  const [isWaving, setIsWaving] = useState(false);
+  const clickCountRef = useRef(0);
+  const debounceTimerRef = useRef(null);
 
   // Effects ---------------------------------------------------------------------
   useEffect(() => {
@@ -261,6 +265,28 @@ const ContactMe = () => {
     setOpenDrawer(open);
   };
 
+  const handleNavClick = useCallback((ref) => {
+    // Incrémenter le compteur de clics rapides
+    clickCountRef.current += 1;
+
+    // Relancer le debounce à chaque clic
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    debounceTimerRef.current = setTimeout(() => {
+      if (clickCountRef.current >= 3) {
+        // Seuil atteint : déclencher l'animation
+        setIsWaving(true);
+        setTimeout(() => setIsWaving(false), 2500); // durée de l'animation
+      }
+      clickCountRef.current = 0;
+    }, 600); // fenêtre de détection des clics rapides
+
+    // Scroll normal
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
   // JSX -------------------------------------------------------------------------
   return (
     <Container ref={refHome} maxWidth={false} disableGutters>
@@ -288,22 +314,51 @@ const ContactMe = () => {
         </Alert>
       </Stack>
       <AppBar position="sticky">
-        <Toolbar disableGutters sx={{columnGap: 2, pl: 5, flexWrap: 'wrap'}}>
-          {navItems.map((item, idx) => (
-            <Button
-              key={idx}
-              sx={{color: 'white', fontWeight: navMenuId === item.id ? 'bold' : 'normal'}}
-              onClick={() => {
-                item.ref.current?.scrollIntoView({
-                  behavior: 'smooth'
-                });
-                }
-              }
-            >
-              {item.nav}
-            </Button>
-          ))}
-        </Toolbar>
+      <Toolbar
+        disableGutters
+        sx={{
+          columnGap: 2,
+          pl: 5,
+          flexWrap: 'wrap',
+          position: 'relative',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            height: '3px',
+            background: `linear-gradient(
+              90deg,
+              transparent 0%,
+              ${theme.palette.secondary.main}55 15%,
+              ${theme.palette.secondary.main} 50%,
+              ${theme.palette.secondary.main}55 85%,
+              transparent 100%
+            )`,
+            backgroundSize: '60% 100%',
+            filter: `drop-shadow(0 0 4px ${theme.palette.secondary.main})`,
+            // Animation uniquement si isWaving
+            animation: isWaving ? 'waveSlide 2s ease-in-out infinite' : 'none',
+            transition: 'opacity 0.3s ease',
+            opacity: isWaving ? 1 : 0,
+          },
+          '@keyframes waveSlide': {
+            '0%': { backgroundPosition: '-60% 0' },
+            '100%': { backgroundPosition: '160% 0' },
+          },
+        }}
+      >
+        {navItems.map((item, idx) => (
+          <Button
+            key={idx}
+            sx={{ color: 'white', fontWeight: navMenuId === item.id ? 'bold' : 'normal' }}
+            onClick={() => handleNavClick(item.ref)}
+          >
+            {item.nav}
+          </Button>
+        ))}
+      </Toolbar>
       </AppBar>
       <Stack 
         sx={{
@@ -422,42 +477,42 @@ const ContactMe = () => {
               data={[
                 {key: 'PHP', value: 90},
                 {key: 'JS', value: 80},
-                {key: 'TypeScript (JS Superset)', value: 70},
-                {key: 'HTML5/CSS3', value: 75}
+                {key: 'TypeScript (JS Superset)', value: 75},
+                {key: 'HTML5/CSS3', value: 80}
 
               ]}/>
                <Skills 
                   title='Frameworks'
                   data={[
-                    {key: 'Laravel', value: 80},
+                    {key: 'Laravel', value: 75},
                     {key: 'Zend Framework 2', value: 60},
-                    {key: 'Symfony', value: 60},
-                    {key: 'PHP MVC', value: 95}
+                    {key: 'Symfony', value: 84},
+                    {key: 'PHP MVC', value: 100}
               ]}/>
               <Skills 
                   title='Technologies'
                   data={[
-                    {key: 'NodeJS', value: 70},
-                    {key: 'MySQL', value: 75},
+                    {key: 'NodeJS', value: 78},
+                    {key: 'SQL', value: 80},
                     {key: 'Git', value: 90}
               ]}/>
               <Skills 
                   title='DevOps & Infrastructure'
                   data={[
-                    {key: 'Docker', value: 50},
+                    {key: 'Docker', value: 70},
                     {key: 'GitHub Actions', value: 65}
               ]}/>
               <Skills 
                   title='Libraries'
                   data={[
-                    {key: 'REACT JS', value: 85},
+                    {key: 'REACT JS', value: 88},
                     {key: 'MUI', value: 85},
                     {key: 'MomentJS', value: 75}
               ]}/>
               <Skills 
                   title='Methodology'
                   data={[
-                    {key: 'AGILE', value: 80}
+                    {key: 'AGILE', value: 85}
               ]}/>
           </Stack>
         </Stack>
