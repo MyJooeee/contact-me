@@ -2,14 +2,14 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  base: '/contact-me/',
   plugins: [react()],
   build: {
-    base: '/contact-me/',
     outDir: 'build',
-    rolldownOptions: {
-    output: {
-      codeSplitting: true, // découpe automatiquement le bundle
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      }
     }
-  }
   }
 })
