@@ -32,6 +32,13 @@ import { useMediaQueries } from '../hooks/useCustomHooks';
 import SpotArtist from './SpotArtist';
 
 // ---------------------------------------------------------------------------------
+// Détection des interactions rapides (clics navbar / scroll)
+const RAPID_DETECTION_DELAY = 600; // fenêtre de détection des interactions rapides (ms)
+const RAPID_CLICK_THRESHOLD = 3; // nombre d'items différents à atteindre dans la fenêtre
+const RAPID_SCROLL_RATIO = 1.5; // distance cumulée dans la fenêtre, en hauteurs de viewport
+const WAVE_DURATION = 2500; // durée de l'animation waveSlide (ms)
+const PROGRAMMATIC_SCROLL_LOCK = 1200; // neutralisation de la détection scroll après un clic navbar (ms)
+
 const ContactMe = () => {
   const APP_VERSION = import.meta.env.VITE_VERSION;
   const urlSpotAccessToken = import.meta.env.VITE_SPOTIFY_URL_ACCESS_TOKEN;
@@ -99,6 +106,12 @@ const ContactMe = () => {
   const [isWaving, setIsWaving] = useState(false);
   const clickCountRef = useRef(0);
   const debounceTimerRef = useRef(null);
+  const lastNavIdRef = useRef(null);
+  const waveTimerRef = useRef(null);
+  const lastScrollYRef = useRef(0);
+  const scrollDistanceRef = useRef(0);
+  const scrollDebounceTimerRef = useRef(null);
+  const programmaticScrollUntilRef = useRef(0);
 
   // Effects ---------------------------------------------------------------------
   useEffect(() => {
@@ -111,6 +124,9 @@ const ContactMe = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(debounceTimerRef.current);
+      clearTimeout(scrollDebounceTimerRef.current);
+      clearTimeout(waveTimerRef.current);
     };
   }, []);
 
@@ -256,6 +272,43 @@ const ContactMe = () => {
     });
 
     setNavMenuId(newActiveSection);
+    detectRapidScroll(pageYOffset);
+  };
+
+  const detectRapidScroll = (pageYOffset) => {
+    const distance = Math.abs(pageYOffset - lastScrollYRef.current);
+    lastScrollYRef.current = pageYOffset;
+
+    // Le scroll provoqué par un clic navbar ne doit pas armer l'animation
+    if (Date.now() < programmaticScrollUntilRef.current) {
+      scrollDistanceRef.current = 0;
+      return;
+    }
+
+    // Cumul de la distance parcourue, relancé à chaque évènement de scroll
+    scrollDistanceRef.current += distance;
+
+    if (scrollDebounceTimerRef.current) {
+      clearTimeout(scrollDebounceTimerRef.current);
+    }
+
+    scrollDebounceTimerRef.current = setTimeout(() => {
+      if (scrollDistanceRef.current >= window.innerHeight * RAPID_SCROLL_RATIO) {
+        // Seuil atteint : déclencher l'animation
+        triggerWave();
+      }
+      scrollDistanceRef.current = 0;
+    }, RAPID_DETECTION_DELAY);
+  };
+
+  const triggerWave = () => {
+    setIsWaving(true);
+
+    if (waveTimerRef.current) {
+      clearTimeout(waveTimerRef.current);
+    }
+
+    waveTimerRef.current = setTimeout(() => setIsWaving(false), WAVE_DURATION);
   };
 
   const toggleDrawer = (open) => (event) => {
@@ -265,26 +318,33 @@ const ContactMe = () => {
     setOpenDrawer(open);
   };
 
-  const handleNavClick = useCallback((ref) => {
-    // Incrémenter le compteur de clics rapides
-    clickCountRef.current += 1;
+  const handleNavClick = useCallback((item) => {
+    // Le scroll programmatique qui suit ne doit pas être vu comme un scroll rapide
+    programmaticScrollUntilRef.current = Date.now() + PROGRAMMATIC_SCROLL_LOCK;
 
-    // Relancer le debounce à chaque clic
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
+    // Un clic sur l'item déjà actif n'alimente pas la détection
+    if (lastNavIdRef.current !== item.id) {
+      // Incrémenter le compteur de clics rapides
+      clickCountRef.current += 1;
+      lastNavIdRef.current = item.id;
+
+      // Relancer le debounce à chaque clic
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+
+      debounceTimerRef.current = setTimeout(() => {
+        if (clickCountRef.current >= RAPID_CLICK_THRESHOLD) {
+          // Seuil atteint : déclencher l'animation
+          triggerWave();
+        }
+        clickCountRef.current = 0;
+        lastNavIdRef.current = null;
+      }, RAPID_DETECTION_DELAY); // fenêtre de détection des clics rapides
     }
 
-    debounceTimerRef.current = setTimeout(() => {
-      if (clickCountRef.current >= 3) {
-        // Seuil atteint : déclencher l'animation
-        setIsWaving(true);
-        setTimeout(() => setIsWaving(false), 2500); // durée de l'animation
-      }
-      clickCountRef.current = 0;
-    }, 600); // fenêtre de détection des clics rapides
-
     // Scroll normal
-    ref.current?.scrollIntoView({ behavior: 'smooth' });
+    item.ref.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   // JSX -------------------------------------------------------------------------
@@ -305,10 +365,10 @@ const ContactMe = () => {
           Jonathan Dancette
         </Typography>
         <Typography variant="h5" sx={{color: blueGrey[50]}}>
-          Web developer
+          Senior Software Engineer
         </Typography>
         <Typography variant="body1" sx={{color: blueGrey[50], textAlign: 'center'}}>
-          Hello world ! I'm Jonathan Dancette, Web developer. I am open-minded boy who likes discover new things. 
+          Hello world ! I'm Jonathan Dancette, Senior Software Engineer. I am open-minded boy who likes discover new things.
         </Typography>
         <Alert severity="info">
           Always interested in meaningful projects.
@@ -354,7 +414,7 @@ const ContactMe = () => {
           <Button
             key={idx}
             sx={{ color: 'white', fontWeight: navMenuId === item.id ? 'bold' : 'normal' }}
-            onClick={() => handleNavClick(item.ref)}
+            onClick={() => handleNavClick(item)}
           >
             {item.nav}
           </Button>
@@ -615,7 +675,7 @@ const ContactMe = () => {
           }}>
           <Link color='white' target="_blank" variant='caption' href='https://fr.linkedin.com/in/jonathan-dancette-72627a61' underline="none">Linkedin</Link> 
           <Link color='white' target="_blank" variant='caption' href='https://github.com/MyJooeee' underline="none">Github</Link> 
-          <Link color='white' target="_blank" variant='caption' href='https://hypersciences.wordpress.com' underline="none">HyperSciences</Link> 
+          <Link color='white' target="_blank" variant='caption' href='https://hypersciences.blog' underline="none">HyperSciences</Link> 
         </Stack>
         <Stack 
           direction="row" 

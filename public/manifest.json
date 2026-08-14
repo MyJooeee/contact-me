@@ -1,6 +1,7 @@
 {
   "short_name": "JD",
   "name": "Jonathan Dancette contact page",
+  "description": "Jonathan Dancette, Senior Software Engineer. Contact page made with ReactJS and MUI.",
   "icons": [
     {
       "src": "favicon.png",
