@@ -27,6 +27,7 @@ import ContactForm from './ContactForm';
 import Skills from './Skills';
 import Project from './Project';
 import Hobby from './Hobby';
+import { HyperSciencesIcon, YouTubeColorIcon } from './BrandIcons';
 // Logic
 import { useMediaQueries } from '../hooks/useCustomHooks';
 import SpotArtist from './SpotArtist';
@@ -358,7 +359,8 @@ const ContactMe = () => {
           backgroundImage: isExtraLargeDevice ? `url(${Earth})` : 'none',
           backgroundColor: isExtraLargeDevice ? 'transparent' : 'black',
           gap: 1, 
-          p: 1 
+          p: 1,
+          position: 'relative'
         }}>
         <Avatar alt="Jonathan Dancette" src={Jonathan} sx={{width: 96, height: 96}} />
         <Typography variant="h4" sx={{color: 'white'}}>
@@ -373,6 +375,42 @@ const ContactMe = () => {
         <Alert severity="info">
           Always interested in meaningful projects.
         </Alert>
+        <Button
+          variant="contained"
+          startIcon={<HyperSciencesIcon sx={{ width: 32, height: 32 }} />}
+          href="https://www.youtube.com/@HyperSciences"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="HyperSciences, my science popularization channel on YouTube"
+          sx={{
+            textTransform: 'none',
+            // Carte de chaîne aux couleurs d'HyperSciences : bleu nuit, liseré bleu
+            minHeight: 48,
+            pl: 1,
+            pr: 2,
+            borderRadius: 2,
+            color: 'white',
+            bgcolor: 'rgba(16, 20, 60, 0.92)',
+            border: '1px solid #4E68C6',
+            '&:hover': { bgcolor: '#1E2761' },
+            '& .MuiButton-startIcon': { ml: 0, mr: 1.25 },
+            // En dessous de lg, il chevaucherait le texte d'intro : centré sous l'Alert
+            position: { xs: 'static', lg: 'absolute' },
+            right: { lg: 24 },
+            // 48 px de haut comme l'Alert : posé sur le même padding, ils s'alignent
+            bottom: { lg: 8 }
+          }}
+        >
+          <Box component="span" sx={{ display: 'grid', gap: '3px', textAlign: 'left', lineHeight: 1 }}>
+            <Box component="span" sx={{ fontSize: 14, fontWeight: 500, letterSpacing: '0.02em' }}>
+              HyperSciences
+            </Box>
+            <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: '5px', fontSize: 11.5, fontWeight: 400, color: '#CFD5F3' }}>
+              <YouTubeColorIcon sx={{ width: 15, height: 11 }} />
+              Science on YouTube
+            </Box>
+          </Box>
+        </Button>
       </Stack>
       <AppBar position="sticky">
       <Toolbar
